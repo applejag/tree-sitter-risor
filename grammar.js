@@ -32,14 +32,12 @@ const
   hexDigits = repeat1(hexDigit),
   octalDigits = repeat1(octalDigit),
   decimalDigits = repeat1(decimalDigit),
-  binaryDigits = repeat1(binaryDigit),
 
   hexLiteral = seq('0', choice('x', 'X'), hexDigits),
-  octalLiteral = seq('0', optional(choice('o', 'O')), octalDigits),
+  octalLiteral = seq('0', octalDigits),
   decimalLiteral = choice('0', decimalDigits),
-  binaryLiteral = seq('0', choice('b', 'B'), binaryDigits),
 
-  intLiteral = choice(binaryLiteral, decimalLiteral, octalLiteral, hexLiteral),
+  intLiteral = choice(decimalLiteral, octalLiteral, hexLiteral),
 
   floatLiteral = choice(
     seq(decimalDigits, '.', optional(decimalDigits)),

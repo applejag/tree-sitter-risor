@@ -2,8 +2,8 @@
 
 var str = 'foo\nmoo{123} bar'
 const num = 123
-bin := 0b101010
-bin += 0x10
+num2 := 070
+num2 += 0xF0
 var arr = [1, 2, 3]
 arr[1] = 5
 
@@ -11,7 +11,7 @@ func yq_eval(file, expr="") {
 	cmd := exec.command("yq", "eval", expr, file)
 	try(cmd.run, "")
 	if cmd.stderr {
-		log_error('YQ eval failed.\n$ yq eval `{expr}` {file}\n{cmd.stderr}')
+		print('YQ eval failed.\n$ yq eval `{expr}` {file}\n{cmd.stderr}')
 		error("failed yq command")
 	}
 	return cmd.stdout
