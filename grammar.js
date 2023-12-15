@@ -27,7 +27,6 @@ const
   hexDigit = /[0-9a-fA-F]/,
   octalDigit = /[0-7]/,
   decimalDigit = /[0-9]/,
-  binaryDigit = /[01]/,
 
   hexDigits = repeat1(hexDigit),
   octalDigits = repeat1(octalDigit),
@@ -112,6 +111,7 @@ module.exports = grammar({
       $.assignment_statement,
       $.expression_statement,
       $.return_statement,
+      $.if_statement,
       // TODO: other kinds of statements
     ),
 
@@ -157,6 +157,16 @@ module.exports = grammar({
     return_statement: $ => seq(
       'return',
       $._expression,
+    ),
+
+    if_statement: $ => seq(
+      'if',
+      field('condition', $._expression),
+      field('consequence', $.block),
+      optional(seq(
+        'else',
+        field('alternative', choice($.block, $.if_statement)),
+      )),
     ),
 
     expression_statement: $ => $._expression,

@@ -74,6 +74,10 @@
         "named": true
       },
       {
+        "type": "if_statement",
+        "named": true
+      },
+      {
         "type": "return_statement",
         "named": true
       },
@@ -292,6 +296,46 @@
         "types": [
           {
             "type": "parameter_list",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "if_statement",
+    "named": true,
+    "fields": {
+      "alternative": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          }
+        ]
+      },
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      },
+      "consequence": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
             "named": true
           }
         ]
@@ -634,6 +678,10 @@
     "named": false
   },
   {
+    "type": "else",
+    "named": false
+  },
+  {
     "type": "escape_sequence",
     "named": true
   },
@@ -656,6 +704,10 @@
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "if",
+    "named": false
   },
   {
     "type": "int_literal",

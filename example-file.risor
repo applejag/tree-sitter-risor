@@ -6,6 +6,7 @@ num2 := 070
 num2 += 0xF0
 var arr = [1, 2, 3]
 arr[1] = 5
+const TRUE = true
 
 func yq_eval(file, expr="") {
 	cmd := exec.command("yq", "eval", expr, file)
