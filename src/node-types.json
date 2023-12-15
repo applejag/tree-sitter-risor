@@ -234,6 +234,10 @@
         {
           "type": "string_template_argument",
           "named": true
+        },
+        {
+          "type": "string_template_plain",
+          "named": true
         }
       ]
     }
@@ -323,6 +327,10 @@
   },
   {
     "type": "string_backtick",
+    "named": true
+  },
+  {
+    "type": "string_template_plain",
     "named": true
   },
   {

@@ -248,7 +248,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_string_template_non_escaped_content"
+                "name": "string_template_plain"
               },
               {
                 "type": "SYMBOL",
@@ -270,50 +270,44 @@
         }
       ]
     },
-    "_string_template_non_escaped_content": {
+    "string_template_plain": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PREC",
-        "value": 1,
+        "type": "REPEAT1",
         "content": {
-          "type": "PATTERN",
-          "value": "[^'\\n\\\\{]"
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "PATTERN",
+            "value": "[^'\\n\\\\{]"
+          }
         }
       }
     },
     "escape_sequence": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "SEQ",
+        "type": "CHOICE",
         "members": [
           {
-            "type": "STRING",
-            "value": "\\"
+            "type": "PATTERN",
+            "value": "\\\\[^xuU]"
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[^xuU]"
-              },
-              {
-                "type": "PATTERN",
-                "value": "\\d{2,3}"
-              },
-              {
-                "type": "PATTERN",
-                "value": "x[0-9a-fA-F]{2,}"
-              },
-              {
-                "type": "PATTERN",
-                "value": "u[0-9a-fA-F]{4}"
-              },
-              {
-                "type": "PATTERN",
-                "value": "U[0-9a-fA-F]{8}"
-              }
-            ]
+            "type": "PATTERN",
+            "value": "\\\\\\d{2,3}"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\\\x[0-9a-fA-F]{2,}"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\\\u[0-9a-fA-F]{4}"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\\\U[0-9a-fA-F]{8}"
           }
         ]
       }

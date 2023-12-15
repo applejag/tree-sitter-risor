@@ -127,23 +127,20 @@ module.exports = grammar({
     string_template: $ => seq(
       "'",
       repeat(choice(
-        $._string_template_non_escaped_content,
+        $.string_template_plain,
         $.escape_sequence,
         $.string_template_argument,
       )),
       token.immediate("'"),
     ),
-    _string_template_non_escaped_content: _ => token.immediate(prec(1, /[^'\n\\{]/)),
+    string_template_plain: _ => token.immediate(repeat1(prec(1, /[^'\n\\{]/))),
 
-    escape_sequence: _ => token.immediate(seq(
-      '\\',
-      choice(
-        /[^xuU]/,
-        /\d{2,3}/,
-        /x[0-9a-fA-F]{2,}/,
-        /u[0-9a-fA-F]{4}/,
-        /U[0-9a-fA-F]{8}/,
-      ),
+    escape_sequence: _ => token.immediate(choice(
+      /\\[^xuU]/,
+      /\\\d{2,3}/,
+      /\\x[0-9a-fA-F]{2,}/,
+      /\\u[0-9a-fA-F]{4}/,
+      /\\U[0-9a-fA-F]{8}/,
     )),
 
     string_template_argument: $ => seq(

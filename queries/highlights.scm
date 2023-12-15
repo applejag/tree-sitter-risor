@@ -53,14 +53,13 @@
 
 [
   (string)
-  (string_template)
+  (string_template_plain)
+  "'"
   (string_backtick)
 ] @string
 
-[
-  (escape_sequence)
-  (string_template_argument)
-] @escape
+(escape_sequence) @string.escape
+(string_template_argument) @none
 
 [
   (int_literal)

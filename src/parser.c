@@ -30,7 +30,7 @@ enum {
   sym__string_non_escaped_content = 11,
   anon_sym_SQUOTE = 12,
   anon_sym_SQUOTE2 = 13,
-  sym__string_template_non_escaped_content = 14,
+  sym_string_template_plain = 14,
   sym_escape_sequence = 15,
   sym_string_backtick = 16,
   sym_int_literal = 17,
@@ -69,7 +69,7 @@ static const char * const ts_symbol_names[] = {
   [sym__string_non_escaped_content] = "_string_non_escaped_content",
   [anon_sym_SQUOTE] = "'",
   [anon_sym_SQUOTE2] = "'",
-  [sym__string_template_non_escaped_content] = "_string_template_non_escaped_content",
+  [sym_string_template_plain] = "string_template_plain",
   [sym_escape_sequence] = "escape_sequence",
   [sym_string_backtick] = "string_backtick",
   [sym_int_literal] = "int_literal",
@@ -108,7 +108,7 @@ static const TSSymbol ts_symbol_map[] = {
   [sym__string_non_escaped_content] = sym__string_non_escaped_content,
   [anon_sym_SQUOTE] = anon_sym_SQUOTE,
   [anon_sym_SQUOTE2] = anon_sym_SQUOTE,
-  [sym__string_template_non_escaped_content] = sym__string_template_non_escaped_content,
+  [sym_string_template_plain] = sym_string_template_plain,
   [sym_escape_sequence] = sym_escape_sequence,
   [sym_string_backtick] = sym_string_backtick,
   [sym_int_literal] = sym_int_literal,
@@ -189,8 +189,8 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
-  [sym__string_template_non_escaped_content] = {
-    .visible = false,
+  [sym_string_template_plain] = {
+    .visible = true,
     .named = true,
   },
   [sym_escape_sequence] = {
@@ -2190,7 +2190,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '(') ADVANCE(33);
       if (lookahead == ')') ADVANCE(34);
       if (lookahead == '.') ADVANCE(17);
-      if (lookahead == '0') ADVANCE(48);
+      if (lookahead == '0') ADVANCE(49);
       if (lookahead == '\\') ADVANCE(5);
       if (lookahead == '`') ADVANCE(8);
       if (lookahead == '{') ADVANCE(35);
@@ -2199,7 +2199,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\n' ||
           lookahead == '\r' ||
           lookahead == ' ') SKIP(30)
-      if (('1' <= lookahead && lookahead <= '9')) ADVANCE(50);
+      if (('1' <= lookahead && lookahead <= '9')) ADVANCE(51);
       if (sym_identifier_character_set_1(lookahead)) ADVANCE(37);
       END_STATE();
     case 1:
@@ -2210,7 +2210,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\t' ||
           lookahead == '\r' ||
           lookahead == ' ') ADVANCE(43);
-      if (lookahead != 0) ADVANCE(43);
+      if (lookahead != 0) ADVANCE(44);
       END_STATE();
     case 2:
       if (lookahead == '"') ADVANCE(39);
@@ -2219,7 +2219,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != '\n') ADVANCE(40);
       END_STATE();
     case 3:
-      if (lookahead == '.') ADVANCE(56);
+      if (lookahead == '.') ADVANCE(57);
       if (lookahead == 'E' ||
           lookahead == 'e') ADVANCE(10);
       if (lookahead == '_') ADVANCE(18);
@@ -2230,26 +2230,26 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '_') ADVANCE(21);
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'F') ||
-          ('a' <= lookahead && lookahead <= 'f')) ADVANCE(51);
+          ('a' <= lookahead && lookahead <= 'f')) ADVANCE(52);
       END_STATE();
     case 5:
       if (lookahead == 'U') ADVANCE(29);
       if (lookahead == 'u') ADVANCE(25);
       if (lookahead == 'x') ADVANCE(23);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(46);
-      if (lookahead != 0) ADVANCE(44);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(47);
+      if (lookahead != 0) ADVANCE(45);
       END_STATE();
     case 6:
       if (lookahead == '_') ADVANCE(13);
       if (lookahead == '0' ||
-          lookahead == '1') ADVANCE(52);
+          lookahead == '1') ADVANCE(53);
       END_STATE();
     case 7:
       if (lookahead == '_') ADVANCE(15);
-      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(53);
+      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(54);
       END_STATE();
     case 8:
-      if (lookahead == '`') ADVANCE(47);
+      if (lookahead == '`') ADVANCE(48);
       if (lookahead != 0) ADVANCE(8);
       END_STATE();
     case 9:
@@ -2262,7 +2262,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 10:
       if (lookahead == '+' ||
           lookahead == '-') ADVANCE(19);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(54);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(55);
       END_STATE();
     case 11:
       if (lookahead == 'P' ||
@@ -2281,37 +2281,37 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 13:
       if (lookahead == '0' ||
-          lookahead == '1') ADVANCE(52);
+          lookahead == '1') ADVANCE(53);
       END_STATE();
     case 14:
       if (lookahead == '8' ||
           lookahead == '9') ADVANCE(3);
-      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(49);
+      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(50);
       END_STATE();
     case 15:
-      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(53);
+      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(54);
       END_STATE();
     case 16:
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(50);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(51);
       END_STATE();
     case 17:
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(55);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(56);
       END_STATE();
     case 18:
       if (('0' <= lookahead && lookahead <= '9')) ADVANCE(3);
       END_STATE();
     case 19:
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(54);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(55);
       END_STATE();
     case 20:
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'F') ||
-          ('a' <= lookahead && lookahead <= 'f')) ADVANCE(44);
+          ('a' <= lookahead && lookahead <= 'f')) ADVANCE(45);
       END_STATE();
     case 21:
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'F') ||
-          ('a' <= lookahead && lookahead <= 'f')) ADVANCE(51);
+          ('a' <= lookahead && lookahead <= 'f')) ADVANCE(52);
       END_STATE();
     case 22:
       if (('0' <= lookahead && lookahead <= '9') ||
@@ -2360,7 +2360,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '(') ADVANCE(33);
       if (lookahead == ')') ADVANCE(34);
       if (lookahead == '.') ADVANCE(17);
-      if (lookahead == '0') ADVANCE(48);
+      if (lookahead == '0') ADVANCE(49);
       if (lookahead == '`') ADVANCE(8);
       if (lookahead == '{') ADVANCE(35);
       if (lookahead == '}') ADVANCE(36);
@@ -2368,7 +2368,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\n' ||
           lookahead == '\r' ||
           lookahead == ' ') SKIP(30)
-      if (('1' <= lookahead && lookahead <= '9')) ADVANCE(50);
+      if (('1' <= lookahead && lookahead <= '9')) ADVANCE(51);
       if (sym_identifier_character_set_1(lookahead)) ADVANCE(37);
       END_STATE();
     case 31:
@@ -2378,14 +2378,14 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '(') ADVANCE(33);
       if (lookahead == ')') ADVANCE(34);
       if (lookahead == '.') ADVANCE(17);
-      if (lookahead == '0') ADVANCE(48);
+      if (lookahead == '0') ADVANCE(49);
       if (lookahead == '`') ADVANCE(8);
       if (lookahead == '}') ADVANCE(36);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
           lookahead == ' ') SKIP(31)
-      if (('1' <= lookahead && lookahead <= '9')) ADVANCE(50);
+      if (('1' <= lookahead && lookahead <= '9')) ADVANCE(51);
       if (sym_identifier_character_set_1(lookahead)) ADVANCE(37);
       END_STATE();
     case 32:
@@ -2423,25 +2423,41 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_SQUOTE2);
       END_STATE();
     case 43:
-      ACCEPT_TOKEN(sym__string_template_non_escaped_content);
+      ACCEPT_TOKEN(sym_string_template_plain);
+      if (lookahead == '\t' ||
+          lookahead == '\r' ||
+          lookahead == ' ') ADVANCE(43);
+      if (lookahead != 0 &&
+          lookahead != '\n' &&
+          lookahead != '\'' &&
+          lookahead != '\\' &&
+          lookahead != '{') ADVANCE(44);
       END_STATE();
     case 44:
-      ACCEPT_TOKEN(sym_escape_sequence);
+      ACCEPT_TOKEN(sym_string_template_plain);
+      if (lookahead != 0 &&
+          lookahead != '\n' &&
+          lookahead != '\'' &&
+          lookahead != '\\' &&
+          lookahead != '{') ADVANCE(44);
       END_STATE();
     case 45:
       ACCEPT_TOKEN(sym_escape_sequence);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(44);
       END_STATE();
     case 46:
       ACCEPT_TOKEN(sym_escape_sequence);
       if (('0' <= lookahead && lookahead <= '9')) ADVANCE(45);
       END_STATE();
     case 47:
-      ACCEPT_TOKEN(sym_string_backtick);
+      ACCEPT_TOKEN(sym_escape_sequence);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(46);
       END_STATE();
     case 48:
+      ACCEPT_TOKEN(sym_string_backtick);
+      END_STATE();
+    case 49:
       ACCEPT_TOKEN(sym_int_literal);
-      if (lookahead == '.') ADVANCE(56);
+      if (lookahead == '.') ADVANCE(57);
       if (lookahead == 'B' ||
           lookahead == 'b') ADVANCE(6);
       if (lookahead == 'E' ||
@@ -2453,27 +2469,27 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '_') ADVANCE(14);
       if (lookahead == '8' ||
           lookahead == '9') ADVANCE(3);
-      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(49);
+      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(50);
       END_STATE();
-    case 49:
+    case 50:
       ACCEPT_TOKEN(sym_int_literal);
-      if (lookahead == '.') ADVANCE(56);
+      if (lookahead == '.') ADVANCE(57);
       if (lookahead == 'E' ||
           lookahead == 'e') ADVANCE(10);
       if (lookahead == '_') ADVANCE(14);
       if (lookahead == '8' ||
           lookahead == '9') ADVANCE(3);
-      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(49);
+      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(50);
       END_STATE();
-    case 50:
+    case 51:
       ACCEPT_TOKEN(sym_int_literal);
-      if (lookahead == '.') ADVANCE(56);
+      if (lookahead == '.') ADVANCE(57);
       if (lookahead == 'E' ||
           lookahead == 'e') ADVANCE(10);
       if (lookahead == '_') ADVANCE(16);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(50);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(51);
       END_STATE();
-    case 51:
+    case 52:
       ACCEPT_TOKEN(sym_int_literal);
       if (lookahead == '.') ADVANCE(12);
       if (lookahead == 'P' ||
@@ -2481,36 +2497,36 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '_') ADVANCE(21);
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'F') ||
-          ('a' <= lookahead && lookahead <= 'f')) ADVANCE(51);
-      END_STATE();
-    case 52:
-      ACCEPT_TOKEN(sym_int_literal);
-      if (lookahead == '_') ADVANCE(13);
-      if (lookahead == '0' ||
-          lookahead == '1') ADVANCE(52);
+          ('a' <= lookahead && lookahead <= 'f')) ADVANCE(52);
       END_STATE();
     case 53:
       ACCEPT_TOKEN(sym_int_literal);
-      if (lookahead == '_') ADVANCE(15);
-      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(53);
+      if (lookahead == '_') ADVANCE(13);
+      if (lookahead == '0' ||
+          lookahead == '1') ADVANCE(53);
       END_STATE();
     case 54:
-      ACCEPT_TOKEN(sym_float_literal);
-      if (lookahead == '_') ADVANCE(19);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(54);
+      ACCEPT_TOKEN(sym_int_literal);
+      if (lookahead == '_') ADVANCE(15);
+      if (('0' <= lookahead && lookahead <= '7')) ADVANCE(54);
       END_STATE();
     case 55:
       ACCEPT_TOKEN(sym_float_literal);
-      if (lookahead == 'E' ||
-          lookahead == 'e') ADVANCE(10);
-      if (lookahead == '_') ADVANCE(17);
+      if (lookahead == '_') ADVANCE(19);
       if (('0' <= lookahead && lookahead <= '9')) ADVANCE(55);
       END_STATE();
     case 56:
       ACCEPT_TOKEN(sym_float_literal);
       if (lookahead == 'E' ||
           lookahead == 'e') ADVANCE(10);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(55);
+      if (lookahead == '_') ADVANCE(17);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(56);
+      END_STATE();
+    case 57:
+      ACCEPT_TOKEN(sym_float_literal);
+      if (lookahead == 'E' ||
+          lookahead == 'e') ADVANCE(10);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(56);
       END_STATE();
     default:
       return false;
@@ -3058,7 +3074,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(138), 1,
       anon_sym_SQUOTE2,
     ACTIONS(140), 2,
-      sym__string_template_non_escaped_content,
+      sym_string_template_plain,
       sym_escape_sequence,
     STATE(25), 2,
       sym_string_template_argument,
@@ -3069,7 +3085,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(145), 1,
       anon_sym_SQUOTE2,
     ACTIONS(147), 2,
-      sym__string_template_non_escaped_content,
+      sym_string_template_plain,
       sym_escape_sequence,
     STATE(27), 2,
       sym_string_template_argument,
@@ -3080,7 +3096,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(149), 1,
       anon_sym_SQUOTE2,
     ACTIONS(151), 2,
-      sym__string_template_non_escaped_content,
+      sym_string_template_plain,
       sym_escape_sequence,
     STATE(25), 2,
       sym_string_template_argument,
@@ -3091,7 +3107,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(153), 1,
       anon_sym_SQUOTE2,
     ACTIONS(155), 2,
-      sym__string_template_non_escaped_content,
+      sym_string_template_plain,
       sym_escape_sequence,
     STATE(29), 2,
       sym_string_template_argument,
@@ -3102,7 +3118,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(157), 1,
       anon_sym_SQUOTE2,
     ACTIONS(151), 2,
-      sym__string_template_non_escaped_content,
+      sym_string_template_plain,
       sym_escape_sequence,
     STATE(25), 2,
       sym_string_template_argument,
@@ -3112,7 +3128,7 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_LBRACE,
     ACTIONS(161), 3,
       anon_sym_SQUOTE2,
-      sym__string_template_non_escaped_content,
+      sym_string_template_plain,
       sym_escape_sequence,
   [560] = 3,
     ACTIONS(163), 1,
