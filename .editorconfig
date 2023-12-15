@@ -9,6 +9,6 @@ indent_style = tab
 indent_size = 4
 tab_width = 4
 
-[*.{json,js,yaml,yml,md,toml,proto,txt}]
+[*.{json,js,yaml,yml,md,toml,proto,txt,scm}]
 indent_size = 2
 indent_style = space

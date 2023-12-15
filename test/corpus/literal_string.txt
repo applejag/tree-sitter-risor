@@ -1,5 +1,5 @@
 ====================
-String double quotes
+Double quoted string
 ====================
 
 "text"
@@ -10,7 +10,19 @@ String double quotes
   (string))
 
 ====================
-String single quotes
+Double quoted string escape sequence
+====================
+
+"new\nline"
+
+---
+
+(source_file
+  (string
+    (escape_sequence)))
+
+====================
+Single quoted string
 ====================
 
 'text'
@@ -19,6 +31,18 @@ String single quotes
 
 (source_file
   (string_template))
+
+====================
+Single quoted string escape sequence
+====================
+
+'new\nline'
+
+---
+
+(source_file
+  (string_template
+    (escape_sequence)))
 
 ====================
 Interpolated string with string

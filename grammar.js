@@ -43,6 +43,8 @@ const
 module.exports = grammar({
   name: 'risor',
 
+  word: $ => $.identifier,
+
   rules: {
     source_file: $ => repeat(choice(
       $._expression,

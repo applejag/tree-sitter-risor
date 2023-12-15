@@ -1,1 +1,10 @@
+# Node/NPM
 node_modules/
+
+# tree-sitter-cli output
+/build/
+*.log
+
+# Rust
+Cargo.lock
+target/
