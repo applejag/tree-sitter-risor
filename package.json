@@ -2,7 +2,7 @@
   "name": "tree-sitter-risor",
   "version": "0.1.0",
   "description": "Tree-sitter grammar for the Risor scripting language <https://risor.io>",
-  "main": "index.js",
+  "main": "bindings/node",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
