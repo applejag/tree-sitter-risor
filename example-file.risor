@@ -1,3 +1,5 @@
+#!/usr/bin/env risor
+
 'foo\nmoo{123} bar'
 123
 

@@ -121,3 +121,6 @@
 ] @constant.builtin
 
 (comment) @comment
+
+((source_file . (comment) @preproc)
+ (#lua-match? @preproc "^#!/"))
