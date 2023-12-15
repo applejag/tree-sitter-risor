@@ -1,0 +1,55 @@
+=======
+Integer decimal
+=======
+
+123
+
+---
+
+(source_file
+  (int_literal))
+
+=======
+Integer binary
+=======
+
+0b101010
+
+---
+
+(source_file
+  (int_literal))
+
+=======
+Integer hexadecimal
+=======
+
+0xFF
+
+---
+
+(source_file
+  (int_literal))
+
+=======
+Integer octal
+=======
+
+0o777
+
+---
+
+(source_file
+  (int_literal))
+
+=======
+Float
+=======
+
+123
+
+---
+
+(source_file
+  (int_literal))
+
