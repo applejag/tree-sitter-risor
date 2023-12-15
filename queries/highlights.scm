@@ -64,8 +64,8 @@
 ] @punctuation.delimiter
 
 [
-  ;"["
-  ;"]"
+  "["
+  "]"
   "{"
   "}"
   "("

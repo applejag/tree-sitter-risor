@@ -7,7 +7,8 @@ Double quoted string
 --------------------------------------------------------------------------------
 
 (source_file
-  (string))
+  (expression_statement
+    (string)))
 
 ================================================================================
 Double quoted escaped string
@@ -18,8 +19,9 @@ Double quoted escaped string
 --------------------------------------------------------------------------------
 
 (source_file
-  (string
-    (escape_sequence)))
+  (expression_statement
+    (string
+      (escape_sequence))))
 
 ================================================================================
 Single quoted string
@@ -30,8 +32,9 @@ Single quoted string
 --------------------------------------------------------------------------------
 
 (source_file
-  (string_template
-    (string_template_plain)))
+  (expression_statement
+    (string_template
+      (string_template_plain))))
 
 ================================================================================
 Single quoted escaped string
@@ -42,10 +45,11 @@ Single quoted escaped string
 --------------------------------------------------------------------------------
 
 (source_file
-  (string_template
-    (string_template_plain)
-    (escape_sequence)
-    (string_template_plain)))
+  (expression_statement
+    (string_template
+      (string_template_plain)
+      (escape_sequence)
+      (string_template_plain))))
 
 ================================================================================
 Interpolated string with string
@@ -56,10 +60,11 @@ Interpolated string with string
 --------------------------------------------------------------------------------
 
 (source_file
-  (string_template
-    (string_template_plain)
-    (string_template_argument
-      (string))))
+  (expression_statement
+    (string_template
+      (string_template_plain)
+      (string_template_argument
+        (string)))))
 
 ================================================================================
 Interpolated string with integer
@@ -70,10 +75,11 @@ Interpolated string with integer
 --------------------------------------------------------------------------------
 
 (source_file
-  (string_template
-    (string_template_plain)
-    (string_template_argument
-      (int_literal))))
+  (expression_statement
+    (string_template
+      (string_template_plain)
+      (string_template_argument
+        (int_literal)))))
 
 ================================================================================
 String backticks
@@ -84,4 +90,5 @@ String backticks
 --------------------------------------------------------------------------------
 
 (source_file
-  (string_backtick))
+  (expression_statement
+    (string_backtick)))

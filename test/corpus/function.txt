@@ -105,7 +105,8 @@ func myfunc() {
     (identifier)
     (parameter_list)
     (block
-      (int_literal))))
+      (expression_statement
+        (int_literal)))))
 
 ================================================================================
 Multiple body statements
@@ -123,5 +124,7 @@ func myfunc() {
     (identifier)
     (parameter_list)
     (block
-      (int_literal)
-      (int_literal))))
+      (expression_statement
+        (int_literal))
+      (expression_statement
+        (int_literal)))))

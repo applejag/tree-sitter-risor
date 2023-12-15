@@ -10,6 +10,17 @@
 // @ts-check
 
 const
+  PREC = {
+    primary: 7,
+    unary: 6,
+    multiplicative: 5,
+    additive: 4,
+    comparative: 3,
+    and: 2,
+    or: 1,
+    composite_literal: -1,
+  },
+
   //comparative_operators = ['==', '!=', '<', '<=', '>', '>='],
   assignment_operators = ['=', '*=', '-=', '+=', '/='],
 
@@ -44,6 +55,11 @@ module.exports = grammar({
   ],
 
   word: $ => $.identifier,
+
+  supertypes: $ => [
+    $._expression,
+    $._statement,
+  ],
 
   rules: {
     source_file: $ => repeat(choice(
@@ -99,8 +115,8 @@ module.exports = grammar({
     _statement: $ => choice(
       $._declaration,
       $.assignment_statement,
+      $.expression_statement,
       $.return_statement,
-      $._expression,
       // TODO: other kinds of statements
     ),
 
@@ -131,10 +147,16 @@ module.exports = grammar({
     ),
 
     assignment_statement: $ => seq(
-      field('left', $.identifier),
-      // TODO: index
+      field('left', $._expression),
+      optional($.assignment_statement_index),
       field('operator', choice(...assignment_operators)),
       field('right', $._expression),
+    ),
+
+    assignment_statement_index: $ => seq(
+      '[',
+      field('index', $._expression),
+      ']',
     ),
 
     return_statement: $ => seq(
@@ -142,7 +164,10 @@ module.exports = grammar({
       $._expression,
     ),
 
+    expression_statement: $ => $._expression,
+
     _expression: $ => choice(
+      $.index_expression,
       $.identifier,
       $._string_literal,
       $.int_literal,
@@ -153,6 +178,13 @@ module.exports = grammar({
       $.false,
       $.parenthesized_expression,
     ),
+
+    index_expression: $ => prec(PREC.primary, seq(
+      field('operand', $._expression),
+      '[',
+      field('index', $._expression),
+      ']',
+    )),
 
     parenthesized_expression: $ => seq(
       '(',
