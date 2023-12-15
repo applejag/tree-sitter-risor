@@ -3,8 +3,6 @@
 
 ; Identifiers
 
-;(type_identifier) @type
-;(field_identifier) @property
 (identifier) @variable
 
 ; Functions
@@ -79,7 +77,7 @@
 [
   ;"break"
   ;"case"
-  ;"const"
+  "const"
   ;"continue"
   ;"default"
   ;"else"
@@ -94,7 +92,7 @@
   ;"return"
   ;"switch"
   ;"true"
-  ;"var"
+  "var"
 ] @keyword
 
 ; Literals

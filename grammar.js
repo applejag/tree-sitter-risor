@@ -44,7 +44,7 @@ module.exports = grammar({
 
   rules: {
     source_file: $ => repeat(choice(
-      $._expression,
+      $._statement,
       $._definition,
     )),
 
@@ -94,9 +94,29 @@ module.exports = grammar({
     ),
 
     _statement: $ => choice(
+      $._declaration,
       $.return_statement,
       $._expression,
       // TODO: other kinds of statements
+    ),
+
+    _declaration: $ => choice(
+      $.const_declaration,
+      $.var_declaration,
+    ),
+
+    const_declaration: $ => seq(
+      'const',
+      field('name', $.identifier),
+      '=',
+      field('value', $._expression),
+    ),
+
+    var_declaration: $ => seq(
+      'var',
+      field('name', $.identifier),
+      '=',
+      field('value', $._expression),
     ),
 
     return_statement: $ => seq(

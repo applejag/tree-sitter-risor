@@ -1,7 +1,7 @@
 #!/usr/bin/env risor
 
-'foo\nmoo{123} bar'
-123
+var str = 'foo\nmoo{123} bar'
+const num = 123
 
 func yq_eval(file, expr="") {
 	cmd := exec.command("yq", "eval", expr, file)
