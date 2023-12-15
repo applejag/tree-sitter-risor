@@ -4,6 +4,7 @@
 ; Identifiers
 
 (identifier) @variable
+(field_identifier) @property
 
 ; Function call
 
@@ -13,6 +14,10 @@
 
 (call_expression
   function: (identifier) @function)
+
+(call_expression
+  function: (selector_expression
+    field: (field_identifier) @function.method))
 
 ; Function declaration
 

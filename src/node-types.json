@@ -36,6 +36,10 @@
         "named": true
       },
       {
+        "type": "selector_expression",
+        "named": true
+      },
+      {
         "type": "string",
         "named": true
       },
@@ -412,6 +416,32 @@
     }
   },
   {
+    "type": "selector_expression",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "field_identifier",
+            "named": true
+          }
+        ]
+      },
+      "operand": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "short_var_declaration",
     "named": true,
     "fields": {
@@ -568,6 +598,10 @@
     "named": false
   },
   {
+    "type": ".",
+    "named": false
+  },
+  {
     "type": "/=",
     "named": false
   },
@@ -605,6 +639,10 @@
   },
   {
     "type": "false",
+    "named": true
+  },
+  {
+    "type": "field_identifier",
     "named": true
   },
   {

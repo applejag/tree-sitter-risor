@@ -162,6 +162,7 @@ module.exports = grammar({
     expression_statement: $ => $._expression,
 
     _expression: $ => choice(
+      $.selector_expression,
       $.index_expression,
       $.call_expression,
       $.identifier,
@@ -173,6 +174,12 @@ module.exports = grammar({
       $.false,
       $.parenthesized_expression,
     ),
+
+    selector_expression: $ => prec(PREC.primary, seq(
+      field('operand', $._expression),
+      '.',
+      field('field', $._field_identifier),
+    )),
 
     index_expression: $ => prec(PREC.primary, seq(
       field('operand', $._expression),
@@ -199,6 +206,7 @@ module.exports = grammar({
     ),
 
     identifier: _ => /[_\p{XID_Start}][_\p{XID_Continue}]*/,
+    _field_identifier: $ => alias($.identifier, $.field_identifier),
 
     _string_literal: $ => choice(
       $.string,
