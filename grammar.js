@@ -43,6 +43,11 @@ const
 module.exports = grammar({
   name: 'risor',
 
+  extras: $ => [
+    $.comment,
+    /[\s\u00A0\uFEFF\u3000]+/,
+  ],
+
   word: $ => $.identifier,
 
   rules: {
@@ -158,5 +163,17 @@ module.exports = grammar({
     int_literal: _ => token(intLiteral),
 
     float_literal: _ => token(floatLiteral),
+
+    // Copied from tree-sitter-c-sharp
+    // https://github.com/tree-sitter/tree-sitter-c-sharp/blob/dd5e59721a5f8dae34604060833902b882023aaf/grammar.js#L1808-L1815
+    comment: _ => token(choice(
+      seq('#', /[^\r\n]*/),
+      seq('//', /[^\r\n]*/),
+      seq(
+        '/*',
+        /[^*]*\*+([^/*][^*]*\*+)*/,
+        '/'
+      )
+    )),
   }
 });
