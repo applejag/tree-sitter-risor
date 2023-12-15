@@ -26,5 +26,10 @@
         "risor"
       ]
     }
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "eslint-config-google": "^0.14.0",
+    "tree-sitter-cli": "^0.20.8"
+  }
 }

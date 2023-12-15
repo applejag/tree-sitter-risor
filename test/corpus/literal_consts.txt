@@ -1,0 +1,32 @@
+=======
+Bool true
+=======
+
+true
+
+---
+
+(source_file
+  (true))
+
+=======
+Bool false
+=======
+
+false
+
+---
+
+(source_file
+  (false))
+
+=======
+Nil
+=======
+
+nil
+
+---
+
+(source_file
+  (nil))

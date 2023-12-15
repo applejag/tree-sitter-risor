@@ -3,42 +3,34 @@
  * https://github.com/tree-sitter/tree-sitter-go/blob/v0.20.0/grammar.js
  */
 
+/* eslint-disable arrow-parens */
+/* eslint-disable camelcase */
+/* eslint-disable-next-line spaced-comment */
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
 const
   hexDigit = /[0-9a-fA-F]/,
   octalDigit = /[0-7]/,
   decimalDigit = /[0-9]/,
   binaryDigit = /[01]/,
 
-  hexDigits = seq(hexDigit, repeat(seq(optional('_'), hexDigit))),
-  octalDigits = seq(octalDigit, repeat(seq(optional('_'), octalDigit))),
-  decimalDigits = seq(decimalDigit, repeat(seq(optional('_'), decimalDigit))),
-  binaryDigits = seq(binaryDigit, repeat(seq(optional('_'), binaryDigit))),
+  hexDigits = repeat1(hexDigit),
+  octalDigits = repeat1(octalDigit),
+  decimalDigits = repeat1(decimalDigit),
+  binaryDigits = repeat1(binaryDigit),
 
-  hexLiteral = seq('0', choice('x', 'X'), optional('_'), hexDigits),
-  octalLiteral = seq('0', optional(choice('o', 'O')), optional('_'), octalDigits),
-  decimalLiteral = choice('0', seq(/[1-9]/, optional(seq(optional('_'), decimalDigits)))),
-  binaryLiteral = seq('0', choice('b', 'B'), optional('_'), binaryDigits),
+  hexLiteral = seq('0', choice('x', 'X'), hexDigits),
+  octalLiteral = seq('0', optional(choice('o', 'O')), octalDigits),
+  decimalLiteral = choice('0', decimalDigits),
+  binaryLiteral = seq('0', choice('b', 'B'), binaryDigits),
 
-  intLiteral = choice(binaryLiteral, decimalLiteral, octalLiteral, hexLiteral);
+  intLiteral = choice(binaryLiteral, decimalLiteral, octalLiteral, hexLiteral),
 
-  decimalExponent = seq(choice('e', 'E'), optional(choice('+', '-')), decimalDigits),
-  decimalFloatLiteral = choice(
-    seq(decimalDigits, '.', optional(decimalDigits), optional(decimalExponent)),
-    seq(decimalDigits, decimalExponent),
-    seq('.', decimalDigits, optional(decimalExponent)),
-  ),
-
-  hexExponent = seq(choice('p', 'P'), optional(choice('+', '-')), decimalDigits),
-  hexMantissa = choice(
-    seq(optional('_'), hexDigits, '.', optional(hexDigits)),
-    seq(optional('_'), hexDigits),
-    seq('.', hexDigits),
-  ),
-  hexFloatLiteral = seq('0', choice('x', 'X'), hexMantissa, hexExponent),
-
-  floatLiteral = choice(decimalFloatLiteral, hexFloatLiteral),
-
-  imaginaryLiteral = seq(choice(decimalDigits, intLiteral, floatLiteral), 'i');
+  floatLiteral = choice(
+    seq(decimalDigits, '.', optional(decimalDigits)),
+    seq('.', decimalDigits),
+  );
 
 module.exports = grammar({
   name: 'risor',
@@ -68,13 +60,13 @@ module.exports = grammar({
       field('body', $.block)
     ),
 
-    parameter_list: $ => seq(
+    parameter_list: _ => seq(
       '(',
        // TODO: parameters
       ')'
     ),
 
-    _type: $ => choice(
+    _type: _ => choice(
       'bool'
       // TODO: other kinds of types
     ),
@@ -101,8 +93,11 @@ module.exports = grammar({
       $._string_literal,
       $.int_literal,
       $.float_literal,
-      $.parenthesized_expression,
       // TODO: other kinds of expressions
+      $.nil,
+      $.true,
+      $.false,
+      $.parenthesized_expression,
     ),
 
     parenthesized_expression: $ => seq(
@@ -163,6 +158,10 @@ module.exports = grammar({
     int_literal: _ => token(intLiteral),
 
     float_literal: _ => token(floatLiteral),
+
+    nil: _ => 'nil',
+    true: _ => 'true',
+    false: _ => 'false',
 
     // Copied from tree-sitter-c-sharp
     // https://github.com/tree-sitter/tree-sitter-c-sharp/blob/dd5e59721a5f8dae34604060833902b882023aaf/grammar.js#L1808-L1815

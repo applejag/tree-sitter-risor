@@ -8,6 +8,10 @@
       "required": false,
       "types": [
         {
+          "type": "false",
+          "named": true
+        },
+        {
           "type": "float_literal",
           "named": true
         },
@@ -17,6 +21,10 @@
         },
         {
           "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "nil",
           "named": true
         },
         {
@@ -37,6 +45,10 @@
         },
         {
           "type": "string_template",
+          "named": true
+        },
+        {
+          "type": "true",
           "named": true
         }
       ]
@@ -92,6 +104,10 @@
       "required": true,
       "types": [
         {
+          "type": "false",
+          "named": true
+        },
+        {
           "type": "float_literal",
           "named": true
         },
@@ -101,6 +117,10 @@
         },
         {
           "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "nil",
           "named": true
         },
         {
@@ -117,6 +137,10 @@
         },
         {
           "type": "string_template",
+          "named": true
+        },
+        {
+          "type": "true",
           "named": true
         }
       ]
@@ -131,6 +155,10 @@
       "required": true,
       "types": [
         {
+          "type": "false",
+          "named": true
+        },
+        {
           "type": "float_literal",
           "named": true
         },
@@ -140,6 +168,10 @@
         },
         {
           "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "nil",
           "named": true
         },
         {
@@ -157,6 +189,10 @@
         {
           "type": "string_template",
           "named": true
+        },
+        {
+          "type": "true",
+          "named": true
         }
       ]
     }
@@ -169,6 +205,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "false",
+          "named": true
+        },
         {
           "type": "float_literal",
           "named": true
@@ -186,6 +226,10 @@
           "named": true
         },
         {
+          "type": "nil",
+          "named": true
+        },
+        {
           "type": "parenthesized_expression",
           "named": true
         },
@@ -199,6 +243,10 @@
         },
         {
           "type": "string_template",
+          "named": true
+        },
+        {
+          "type": "true",
           "named": true
         }
       ]
@@ -251,6 +299,10 @@
       "required": true,
       "types": [
         {
+          "type": "false",
+          "named": true
+        },
+        {
           "type": "float_literal",
           "named": true
         },
@@ -260,6 +312,10 @@
         },
         {
           "type": "int_literal",
+          "named": true
+        },
+        {
+          "type": "nil",
           "named": true
         },
         {
@@ -276,6 +332,10 @@
         },
         {
           "type": "string_template",
+          "named": true
+        },
+        {
+          "type": "true",
           "named": true
         }
       ]
@@ -310,6 +370,10 @@
     "named": true
   },
   {
+    "type": "false",
+    "named": true
+  },
+  {
     "type": "float_literal",
     "named": true
   },
@@ -326,6 +390,10 @@
     "named": true
   },
   {
+    "type": "nil",
+    "named": true
+  },
+  {
     "type": "return",
     "named": false
   },
@@ -335,6 +403,10 @@
   },
   {
     "type": "string_template_plain",
+    "named": true
+  },
+  {
+    "type": "true",
     "named": true
   },
   {

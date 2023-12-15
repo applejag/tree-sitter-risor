@@ -1,0 +1,21 @@
+=======
+Decimal leading numbers
+=======
+
+12.3
+
+---
+
+(source_file
+  (float_literal))
+
+=======
+Decimal without leading numbers
+=======
+
+.123
+
+---
+
+(source_file
+  (float_literal))

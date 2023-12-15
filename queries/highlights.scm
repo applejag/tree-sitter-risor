@@ -66,10 +66,10 @@
   (float_literal)
 ] @number
 
-;[
-;  (true)
-;  (false)
-;  (nil)
-;] @constant.builtin
+[
+  (true)
+  (false)
+  (nil)
+] @constant.builtin
 
 (comment) @comment

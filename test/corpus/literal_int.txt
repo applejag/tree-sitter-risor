@@ -1,5 +1,5 @@
 =======
-Integer decimal
+Decimal
 =======
 
 123
@@ -10,7 +10,7 @@ Integer decimal
   (int_literal))
 
 =======
-Integer binary
+Binary
 =======
 
 0b101010
@@ -21,7 +21,7 @@ Integer binary
   (int_literal))
 
 =======
-Integer hexadecimal
+Hexadecimal
 =======
 
 0xFF
@@ -32,7 +32,7 @@ Integer hexadecimal
   (int_literal))
 
 =======
-Integer octal
+Octal
 =======
 
 0o777
@@ -41,15 +41,3 @@ Integer octal
 
 (source_file
   (int_literal))
-
-=======
-Float
-=======
-
-123
-
----
-
-(source_file
-  (int_literal))
-
