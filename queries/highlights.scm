@@ -7,6 +7,15 @@
 ;(field_identifier) @property
 (identifier) @variable
 
+; Functions
+(parameter_list
+  (parameter_declaration
+   name: (identifier) @parameter))
+
+(parameter_list
+  (parameter_declaration_default
+   name: (identifier) @parameter))
+
 ; Operators
 
 ;[
@@ -48,6 +57,45 @@
 ;  "||"
 ;  "~"
 ;] @operator
+
+[
+  ;";"
+  ;"."
+  ","
+  ;":"
+] @punctuation.delimiter
+
+[
+  ;"["
+  ;"]"
+  "{"
+  "}"
+  "("
+  ")"
+] @punctuation.bracket
+
+; Keywords
+
+[
+  ;"break"
+  ;"case"
+  ;"const"
+  ;"continue"
+  ;"default"
+  ;"else"
+  ;"false"
+  ;"for"
+  "func"
+  ;"if"
+  ;"import"
+  ;"in"
+  ;"nil"
+  ;"range"
+  ;"return"
+  ;"switch"
+  ;"true"
+  ;"var"
+] @keyword
 
 ; Literals
 

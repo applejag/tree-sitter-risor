@@ -1,87 +1,127 @@
 ================================================================================
-Double quoted string
+Empty parameter and body
 ================================================================================
 
-"text"
+func myfunc() {
+}
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (string))
+  (function_definition
+    (identifier)
+    (parameter_list)
+    (block)))
 
 ================================================================================
-Double quoted escaped string
+Single parameter
 ================================================================================
 
-"new\nline"
+func myfunc(param1) {
+}
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (string
-    (escape_sequence)))
+  (function_definition
+    (identifier)
+    (parameter_list
+      (parameter_declaration
+        (identifier)))
+    (block)))
 
 ================================================================================
-Single quoted string
+Single default parameter
 ================================================================================
 
-'text'
+func myfunc(param1 = 123) {
+}
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (string_template
-    (string_template_plain)))
+  (function_definition
+    (identifier)
+    (parameter_list
+      (parameter_declaration_default
+        (identifier)
+        (int_literal)))
+    (block)))
 
 ================================================================================
-Single quoted escaped string
+Multiple parameters without trailing comma
 ================================================================================
 
-'new\nline'
+func myfunc(param1, param2, param3) {
+}
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (string_template
-    (string_template_plain)
-    (escape_sequence)
-    (string_template_plain)))
+  (function_definition
+    (identifier)
+    (parameter_list
+      (parameter_declaration
+        (identifier))
+      (parameter_declaration
+        (identifier))
+      (parameter_declaration
+        (identifier)))
+    (block)))
 
 ================================================================================
-Interpolated string with string
+Multiple parameters with trailing comma
 ================================================================================
 
-'text {"another string in here"}'
+func myfunc(param1, param2, param3,) {
+}
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (string_template
-    (string_template_plain)
-    (string_template_argument
-      (string))))
+  (function_definition
+    (identifier)
+    (parameter_list
+      (parameter_declaration
+        (identifier))
+      (parameter_declaration
+        (identifier))
+      (parameter_declaration
+        (identifier)))
+    (block)))
 
 ================================================================================
-Interpolated string with integer
+Single body statement
 ================================================================================
 
-'text {123}'
+func myfunc() {
+  123
+}
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (string_template
-    (string_template_plain)
-    (string_template_argument
+  (function_definition
+    (identifier)
+    (parameter_list)
+    (block
       (int_literal))))
 
 ================================================================================
-String backticks
+Multiple body statements
 ================================================================================
 
-`text`
+func myfunc() {
+  123
+  456
+}
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (string_backtick))
+  (function_definition
+    (identifier)
+    (parameter_list)
+    (block
+      (int_literal)
+      (int_literal))))

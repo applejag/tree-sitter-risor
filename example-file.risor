@@ -1,2 +1,12 @@
 'foo\nmoo{123} bar'
 123
+
+func yq_eval(file, expr="") {
+	cmd := exec.command("yq", "eval", expr, file)
+	try(cmd.run, "")
+	if cmd.stderr {
+		log_error('YQ eval failed.\n$ yq eval `{expr}` {file}\n{cmd.stderr}')
+		error("failed yq command")
+	}
+	return cmd.stdout
+}

@@ -60,10 +60,26 @@ module.exports = grammar({
       field('body', $.block)
     ),
 
-    parameter_list: _ => seq(
+    parameter_list: $ => seq(
       '(',
-       // TODO: parameters
+      optional(seq(
+        commaSep($._parameter_declaration),
+        optional(','),
+      )),
       ')'
+    ),
+
+    _parameter_declaration: $ => prec.left(choice(
+      $.parameter_declaration,
+      $.parameter_declaration_default,
+    )),
+
+    parameter_declaration: $ => field('name', $.identifier),
+
+    parameter_declaration_default: $ => seq(
+      field('name', $.identifier),
+      '=',
+      field('default', $._expression),
     ),
 
     _type: _ => choice(
@@ -176,3 +192,27 @@ module.exports = grammar({
     )),
   }
 });
+
+/**
+ * Creates a rule to match one or more of the rules separated by a comma
+ *
+ * @param {Rule} rule
+ *
+ * @return {SeqRule}
+ *
+ */
+function commaSep1(rule) {
+  return seq(rule, repeat(seq(',', rule)));
+}
+
+/**
+ * Creates a rule to optionally match one or more of the rules separated by a comma
+ *
+ * @param {Rule} rule
+ *
+ * @return {ChoiceRule}
+ *
+ */
+function commaSep(rule) {
+  return optional(commaSep1(rule));
+}
