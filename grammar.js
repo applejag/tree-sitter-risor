@@ -79,10 +79,7 @@ module.exports = grammar({
 
     parameter_list: $ => seq(
       '(',
-      optional(seq(
-        commaSep($._parameter_declaration),
-        optional(','),
-      )),
+      commaSepTrailing($._parameter_declaration),
       ')'
     ),
 
@@ -166,11 +163,11 @@ module.exports = grammar({
 
     _expression: $ => choice(
       $.index_expression,
+      $.call_expression,
       $.identifier,
       $._string_literal,
       $.int_literal,
       $.float_literal,
-      // TODO: other kinds of expressions
       $.nil,
       $.true,
       $.false,
@@ -187,6 +184,17 @@ module.exports = grammar({
     parenthesized_expression: $ => seq(
       '(',
       $._expression,
+      ')',
+    ),
+
+    call_expression: $ => prec(PREC.primary, seq(
+      field('function', $._expression),
+      field('arguments', $.argument_list),
+    )),
+
+    argument_list: $ => seq(
+      '(',
+      commaSepTrailing($._expression),
       ')',
     ),
 
@@ -283,4 +291,20 @@ function commaSep1(rule) {
  */
 function commaSep(rule) {
   return optional(commaSep1(rule));
+}
+
+/**
+ * Creates a rule to optionally match one or more of the rules separated by a comma,
+ * and allowing a trailing comma at the end.
+ *
+ * @param {Rule} rule
+ *
+ * @return {ChoiceRule}
+ *
+ */
+function commaSepTrailing(rule) {
+  return optional(seq(
+    commaSep(rule),
+    optional(','),
+  ));
 }

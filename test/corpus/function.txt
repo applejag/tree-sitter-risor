@@ -128,3 +128,34 @@ func myfunc() {
         (int_literal))
       (expression_statement
         (int_literal)))))
+
+================================================================================
+Call function without parameters
+================================================================================
+
+myfunc()
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list))))
+
+================================================================================
+Call function with parameters
+================================================================================
+
+myfunc(1, 2, 3)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list
+        (int_literal)
+        (int_literal)
+        (int_literal)))))
