@@ -10,6 +10,9 @@
 // @ts-check
 
 const
+  //comparative_operators = ['==', '!=', '<', '<=', '>', '>='],
+  assignment_operators = ['=', '*=', '-=', '+=', '/='],
+
   hexDigit = /[0-9a-fA-F]/,
   octalDigit = /[0-7]/,
   decimalDigit = /[0-9]/,
@@ -95,6 +98,7 @@ module.exports = grammar({
 
     _statement: $ => choice(
       $._declaration,
+      $.assignment_statement,
       $.return_statement,
       $._expression,
       // TODO: other kinds of statements
@@ -103,6 +107,7 @@ module.exports = grammar({
     _declaration: $ => choice(
       $.const_declaration,
       $.var_declaration,
+      $.short_var_declaration,
     ),
 
     const_declaration: $ => seq(
@@ -117,6 +122,19 @@ module.exports = grammar({
       field('name', $.identifier),
       '=',
       field('value', $._expression),
+    ),
+
+    short_var_declaration: $ => seq(
+      field('left', $.identifier),
+      ':=',
+      field('right', $._expression),
+    ),
+
+    assignment_statement: $ => seq(
+      field('left', $.identifier),
+      // TODO: index
+      field('operator', choice(...assignment_operators)),
+      field('right', $._expression),
     ),
 
     return_statement: $ => seq(
