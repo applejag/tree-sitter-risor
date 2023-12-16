@@ -51,6 +51,11 @@ module.exports = grammar({
     /[\s\u00A0\uFEFF\u3000]+/,
   ],
 
+  inline: $ => [
+    $._field_identifier,
+    $._string_literal,
+  ],
+
   word: $ => $.identifier,
 
   supertypes: $ => [
@@ -108,10 +113,11 @@ module.exports = grammar({
 
     _statement: $ => choice(
       $._declaration,
-      $.assignment_statement,
       $.expression_statement,
+      $.assignment_statement,
       $.return_statement,
       $.if_statement,
+      $.for_statement,
       // TODO: other kinds of statements
     ),
 
@@ -123,35 +129,28 @@ module.exports = grammar({
 
     const_declaration: $ => seq(
       'const',
-      field('name', $.identifier),
+      field('name', $.expression_list),
       '=',
       field('value', $._expression),
     ),
 
     var_declaration: $ => seq(
       'var',
-      field('name', $.identifier),
+      field('name', $.expression_list),
       '=',
       field('value', $._expression),
     ),
 
     short_var_declaration: $ => seq(
-      field('left', $.identifier),
+      field('left', $.expression_list),
       ':=',
       field('right', $._expression),
     ),
 
     assignment_statement: $ => seq(
-      field('left', $._expression),
-      optional($.assignment_statement_index),
+      field('left', $.expression_list),
       field('operator', choice(...assignment_operators)),
       field('right', $._expression),
-    ),
-
-    assignment_statement_index: $ => seq(
-      '[',
-      field('index', $._expression),
-      ']',
     ),
 
     return_statement: $ => seq(
@@ -167,6 +166,32 @@ module.exports = grammar({
         'else',
         field('alternative', choice($.block, $.if_statement)),
       )),
+    ),
+
+    for_statement: $ => seq(
+      'for',
+      optional(choice($._expression, $.for_clause, $.range_clause)),
+      field('body', $.block),
+    ),
+
+    for_clause: $ => seq(
+      field('initializer', optional($._statement)),
+      ';',
+      field('condition', optional($._expression)),
+      ';',
+      field('update', optional($._statement)),
+    ),
+
+    range_clause: $ => seq(
+      // In contrast to Go, Risor supports this:
+      // for var x = range [1, 2, 3]
+      field('left', choice(
+        seq('const', $.expression_list, '='),
+        seq('var', $.expression_list, '='),
+        seq($.expression_list, ':='),
+      )),
+      'range',
+      field('right', $._expression),
     ),
 
     expression_statement: $ => $._expression,
@@ -197,6 +222,8 @@ module.exports = grammar({
       field('index', $._expression),
       ']',
     )),
+
+    expression_list: $ => commaSep1($._expression),
 
     parenthesized_expression: $ => seq(
       '(',

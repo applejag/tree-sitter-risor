@@ -8,7 +8,8 @@ const a = 1
 
 (source_file
   (const_declaration
-    (identifier)
+    (expression_list
+      (identifier))
     (int_literal)))
 
 ================================================================================
@@ -21,7 +22,8 @@ var a = 1
 
 (source_file
   (var_declaration
-    (identifier)
+    (expression_list
+      (identifier))
     (int_literal)))
 
 ================================================================================
@@ -34,5 +36,6 @@ a := 1
 
 (source_file
   (short_var_declaration
-    (identifier)
+    (expression_list
+      (identifier))
     (int_literal)))

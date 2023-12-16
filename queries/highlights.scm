@@ -72,8 +72,8 @@
 ] @operator
 
 [
-  ;";"
-  ;"."
+  ";"
+  "."
   ","
   ;":"
 ] @punctuation.delimiter
@@ -96,12 +96,12 @@
   ;"continue"
   ;"default"
   "else"
-  ;"for"
+  "for"
+  "range"
   "func"
   "if"
   ;"import"
   ;"in"
-  ;"range"
   ;"switch"
   "var"
 ] @keyword

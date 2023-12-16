@@ -8,7 +8,8 @@ a = 1
 
 (source_file
   (assignment_statement
-    (identifier)
+    (expression_list
+      (identifier))
     (int_literal)))
 
 ================================================================================
@@ -24,16 +25,20 @@ a /= 1
 
 (source_file
   (assignment_statement
-    (identifier)
+    (expression_list
+      (identifier))
     (int_literal))
   (assignment_statement
-    (identifier)
+    (expression_list
+      (identifier))
     (int_literal))
   (assignment_statement
-    (identifier)
+    (expression_list
+      (identifier))
     (int_literal))
   (assignment_statement
-    (identifier)
+    (expression_list
+      (identifier))
     (int_literal)))
 
 ================================================================================
@@ -46,7 +51,8 @@ a[1] = 1
 
 (source_file
   (assignment_statement
-    (index_expression
-      (identifier)
-      (int_literal))
+    (expression_list
+      (index_expression
+        (identifier)
+        (int_literal)))
     (int_literal)))
