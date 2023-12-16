@@ -11,17 +11,20 @@
 
 const
   PREC = {
-    primary: 7,
-    unary: 6,
-    multiplicative: 5,
-    additive: 4,
-    comparative: 3,
-    and: 2,
-    or: 1,
     composite_literal: -1,
+    or: 1,
+    and: 2,
+    ternary: 3,
+    comparative: 4,
+    additive: 5,
+    multiplicative: 6,
+    unary: 7,
+    primary: 8,
   },
 
-  //comparative_operators = ['==', '!=', '<', '<=', '>', '>='],
+  multiplicative_operators = ['*', '/', '**', '%', '<<', '>>'],
+  additive_operators = ['+', '-', '|'],
+  comparative_operators = ['==', '!=', '<', '<=', '>', '>='],
   assignment_operators = ['=', '*=', '-=', '+=', '/='],
 
   newline = '\n',
@@ -123,6 +126,8 @@ module.exports = grammar({
     _statement: $ => choice(
       $._declaration,
       $.expression_statement,
+      $.inc_statement,
+      $.dec_statement,
       $.assignment_statement,
       $.return_statement,
       $.if_statement,
@@ -155,6 +160,16 @@ module.exports = grammar({
       field('left', $.expression_list),
       ':=',
       field('right', $._expression),
+    ),
+
+    inc_statement: $ => seq(
+      $._expression,
+      '++',
+    ),
+
+    dec_statement: $ => seq(
+      $._expression,
+      '--',
     ),
 
     assignment_statement: $ => seq(
@@ -228,6 +243,8 @@ module.exports = grammar({
     expression_statement: $ => $._expression,
 
     _expression: $ => choice(
+      $.unary_expression,
+      $.binary_expression,
       $.selector_expression,
       $.index_expression,
       $.call_expression,
@@ -272,6 +289,31 @@ module.exports = grammar({
       commaSepTrailing($._expression),
       ')',
     ),
+
+    unary_expression: $ => prec(PREC.unary, seq(
+      field('operator', choice('+', '-', '!', '^', '*', '&', '<-')),
+      field('operand', $._expression),
+    )),
+
+    binary_expression: $ => {
+      const table = [
+        [PREC.multiplicative, choice(...multiplicative_operators)],
+        [PREC.additive, choice(...additive_operators)],
+        [PREC.comparative, choice(...comparative_operators)],
+        [PREC.and, '&&'],
+        [PREC.or, '||'],
+      ];
+
+      return choice(...table.map(([precedence, operator]) =>
+        // @ts-ignore
+        prec.left(precedence, seq(
+          field('left', $._expression),
+          // @ts-ignore
+          field('operator', operator),
+          field('right', $._expression),
+        )),
+      ));
+    },
 
     identifier: _ => /[_\p{XID_Start}][_\p{XID_Continue}]*/,
     _field_identifier: $ => alias($.identifier, $.field_identifier),

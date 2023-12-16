@@ -2,11 +2,12 @@
 
 var str = 'foo\nmoo{123} bar'
 const num = 123
-num2 := 070
+num2 := 070 ** 3
 num2 += 0xF0
 var arr = [1, 2, 3]
-arr[1] = 5
+arr[1] = 5 << 2
 const TRUE = true
+num2++
 
 func yq_eval(file, expr="") {
 	cmd := exec.command("yq", "eval", expr, file)
