@@ -82,21 +82,34 @@
 ; Keywords
 
 [
-  "break"
-  "case"
   "const"
-  "continue"
-  "default"
-  "else"
-  "for"
-  "range"
-  "func"
-  "if"
-  ;"import"
-  ;"in"
-  "switch"
   "var"
 ] @keyword
+
+[
+  "func"
+] @keyword.function
+
+[
+  "for"
+  "range"
+  "break"
+  "continue"
+] @keyword @repeat
+
+[
+  "if"
+  "else"
+  "switch"
+  "case"
+  "default"
+] @keyword @conditional
+
+[
+  "import"
+  "from"
+  "as"
+] @keyword @include
 
 [
   "return"

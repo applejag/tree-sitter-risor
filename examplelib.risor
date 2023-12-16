@@ -1,0 +1,4 @@
+
+func funcFromOtherFile() {
+	fmt.println("hello from examplelib.risor")
+}

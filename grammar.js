@@ -132,6 +132,7 @@ module.exports = grammar({
       $.switch_statement,
       $.break_statement,
       $.continue_statement,
+      $.import_statement,
       // TODO: other kinds of statements
     ),
 
@@ -190,6 +191,29 @@ module.exports = grammar({
     continue_statement: _ => seq('continue'),
 
     return_statement: $ => seq('return', optional($._expression)),
+
+    import_statement: $ => seq(
+      optional($.import_statement_from),
+      'import',
+      field('name', $.identifier),
+      optional($.import_statement_as),
+    ),
+
+    import_statement_from: $ => seq(
+      'from',
+      seq(
+        $.identifier,
+        repeat(seq(
+          '.',
+          $.identifier,
+        )),
+      ),
+    ),
+
+    import_statement_as: $ => seq(
+      'as',
+      field('name', $.identifier),
+    ),
 
     if_statement: $ => seq(
       'if',

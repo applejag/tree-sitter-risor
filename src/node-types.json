@@ -110,6 +110,10 @@
         "named": true
       },
       {
+        "type": "import_statement",
+        "named": true
+      },
+      {
         "type": "inc_statement",
         "named": true
       },
@@ -642,6 +646,67 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "import_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "import_statement_as",
+          "named": true
+        },
+        {
+          "type": "import_statement_from",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "import_statement_as",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "import_statement_from",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1329,6 +1394,10 @@
     "named": false
   },
   {
+    "type": "as",
+    "named": false
+  },
+  {
     "type": "bool",
     "named": false
   },
@@ -1385,6 +1454,10 @@
     "named": true
   },
   {
+    "type": "from",
+    "named": false
+  },
+  {
     "type": "func",
     "named": false
   },
@@ -1394,6 +1467,10 @@
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "import",
     "named": false
   },
   {

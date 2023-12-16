@@ -1,5 +1,7 @@
 #!/usr/bin/env risor
 
+import examplelib
+
 var str = 'foo\nmoo{123} bar'
 const num = 123
 num2 := 070 ** 3
@@ -22,3 +24,5 @@ func yq_eval(file, expr="") {
 for i, v := range ["a", "b", "c"] {
 	fmt.printf("%d: %q\n", i, v)
 }
+
+examplelib.funcFromOtherFile()
