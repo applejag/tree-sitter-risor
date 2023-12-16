@@ -11,7 +11,8 @@
 
 const
   PREC = {
-    composite_literal: -1,
+    block: -2,
+    complex_literal: -1,
     or: 1,
     and: 2,
     ternary: 3,
@@ -111,11 +112,11 @@ module.exports = grammar({
       // TODO: other kinds of types
     ),
 
-    block: $ => seq(
+    block: $ => prec(PREC.block, seq(
       '{',
       optional($._statement_list),
       '}'
-    ),
+    )),
 
     _statement_list: $ => seq(
       $._statement,
@@ -124,11 +125,7 @@ module.exports = grammar({
     ),
 
     _statement: $ => choice(
-      $._declaration,
-      $.expression_statement,
-      $.inc_statement,
-      $.dec_statement,
-      $.assignment_statement,
+      $._simple_statement,
       $.return_statement,
       $.if_statement,
       $.for_statement,
@@ -136,6 +133,14 @@ module.exports = grammar({
       $.break_statement,
       $.continue_statement,
       // TODO: other kinds of statements
+    ),
+
+    _simple_statement: $ => choice(
+      $._declaration,
+      $.expression_statement,
+      $.inc_statement,
+      $.dec_statement,
+      $.assignment_statement,
     ),
 
     _declaration: $ => choice(
@@ -202,13 +207,13 @@ module.exports = grammar({
       field('body', $.block),
     ),
 
-    for_clause: $ => seq(
-      field('initializer', optional($._statement)),
+    for_clause: $ => prec.left(seq(
+      field('initializer', optional($._simple_statement)),
       ';',
       field('condition', optional($._expression)),
       ';',
-      field('update', optional($._statement)),
-    ),
+      field('update', optional($._simple_statement)),
+    )),
 
     range_clause: $ => seq(
       // In contrast to Go, Risor supports this:
@@ -252,6 +257,7 @@ module.exports = grammar({
       $.index_expression,
       $.call_expression,
       $.identifier,
+      $._complex_literal,
       $._string_literal,
       $.int_literal,
       $.float_literal,
@@ -292,6 +298,23 @@ module.exports = grammar({
       commaSepTrailing($._expression),
       ')',
     ),
+
+    _complex_literal: $ => prec(PREC.complex_literal, choice(
+      $.list_literal,
+      $.set_literal,
+    )),
+
+    list_literal: $ => seq(
+      '[',
+      commaSep($._expression),
+      ']',
+    ),
+
+    set_literal: $ => prec(1, seq(
+      '{',
+      commaSep($._expression),
+      '}',
+    )),
 
     unary_expression: $ => prec(PREC.unary, seq(
       field('operator', choice('+', '-', '!', '^', '*', '&', '<-')),

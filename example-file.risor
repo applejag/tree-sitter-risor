@@ -19,3 +19,7 @@ func yq_eval(file, expr="") {
 	return cmd.stdout
 }
 
+x := {1,2,3}
+for x == {1,2,3} {
+	printf("x: %#v", x)
+}

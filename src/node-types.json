@@ -32,6 +32,10 @@
         "named": true
       },
       {
+        "type": "list_literal",
+        "named": true
+      },
+      {
         "type": "nil",
         "named": true
       },
@@ -41,6 +45,10 @@
       },
       {
         "type": "selector_expression",
+        "named": true
+      },
+      {
+        "type": "set_literal",
         "named": true
       },
       {
@@ -461,7 +469,31 @@
         "required": false,
         "types": [
           {
-            "type": "_statement",
+            "type": "assignment_statement",
+            "named": true
+          },
+          {
+            "type": "const_declaration",
+            "named": true
+          },
+          {
+            "type": "dec_statement",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          },
+          {
+            "type": "inc_statement",
+            "named": true
+          },
+          {
+            "type": "short_var_declaration",
+            "named": true
+          },
+          {
+            "type": "var_declaration",
             "named": true
           }
         ]
@@ -471,7 +503,31 @@
         "required": false,
         "types": [
           {
-            "type": "_statement",
+            "type": "assignment_statement",
+            "named": true
+          },
+          {
+            "type": "const_declaration",
+            "named": true
+          },
+          {
+            "type": "dec_statement",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          },
+          {
+            "type": "inc_statement",
+            "named": true
+          },
+          {
+            "type": "short_var_declaration",
+            "named": true
+          },
+          {
+            "type": "var_declaration",
             "named": true
           }
         ]
@@ -627,6 +683,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "list_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -786,6 +857,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "set_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
