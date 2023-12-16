@@ -85,13 +85,13 @@ module.exports = grammar({
       'func',
       field('name', $.identifier),
       field('parameters', $.parameter_list),
-      field('body', $.block)
+      field('body', $.block),
     )),
 
     parameter_list: $ => seq(
       '(',
       commaSepTrailing($._parameter_declaration),
-      ')'
+      ')',
     ),
 
     _parameter_declaration: $ => prec.left(choice(
@@ -108,14 +108,14 @@ module.exports = grammar({
     ),
 
     _type: _ => choice(
-      'bool'
+      'bool',
       // TODO: other kinds of types
     ),
 
     block: $ => prec(PREC.block, seq(
       '{',
       optional($._statement_list),
-      '}'
+      '}',
     )),
 
     _statement_list: $ => seq(
@@ -375,14 +375,14 @@ module.exports = grammar({
     _string_non_escaped_content: _ => token.immediate(/[^"\n\\]/),
 
     string_template: $ => seq(
-      "'",
+      '\'',
       repeat(choice(
         $.format_sequence,
         $.escape_sequence,
         $.string_template_argument,
         $.string_template_char,
       )),
-      token.immediate("'"),
+      token.immediate('\''),
     ),
     string_template_char: _ => token.immediate(/[^'\n\\{]/),
 
@@ -437,10 +437,10 @@ module.exports = grammar({
       seq(
         '/*',
         /[^*]*\*+([^/*][^*]*\*+)*/,
-        '/'
-      )
+        '/',
+      ),
     ))),
-  }
+  },
 });
 
 /**
