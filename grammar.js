@@ -133,6 +133,8 @@ module.exports = grammar({
       $.if_statement,
       $.for_statement,
       $.switch_statement,
+      $.break_statement,
+      $.continue_statement,
       // TODO: other kinds of statements
     ),
 
@@ -178,10 +180,11 @@ module.exports = grammar({
       field('right', $._expression),
     ),
 
-    return_statement: $ => seq(
-      'return',
-      $._expression,
-    ),
+    break_statement: _ => seq('break'),
+
+    continue_statement: _ => seq('continue'),
+
+    return_statement: $ => seq('return', optional($._expression)),
 
     if_statement: $ => seq(
       'if',

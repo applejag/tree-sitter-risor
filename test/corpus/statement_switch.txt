@@ -37,6 +37,7 @@ case 1:
   123
 case 2:
   456
+  break
 case 3:
   789
 }
@@ -55,7 +56,8 @@ case 3:
       (expression_list
         (int_literal))
       (expression_statement
-        (int_literal)))
+        (int_literal))
+      (break_statement))
     (switch_case
       (expression_list
         (int_literal))

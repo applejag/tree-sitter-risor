@@ -83,10 +83,10 @@
 ; Keywords
 
 [
-  ;"break"
+  "break"
   "case"
   "const"
-  ;"continue"
+  "continue"
   "default"
   "else"
   "for"
