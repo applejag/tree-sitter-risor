@@ -680,6 +680,10 @@
         {
           "type": "escape_sequence",
           "named": true
+        },
+        {
+          "type": "format_sequence",
+          "named": true
         }
       ]
     }
@@ -697,11 +701,15 @@
           "named": true
         },
         {
+          "type": "format_sequence",
+          "named": true
+        },
+        {
           "type": "string_template_argument",
           "named": true
         },
         {
-          "type": "string_template_plain",
+          "type": "string_template_char",
           "named": true
         }
       ]
@@ -921,6 +929,10 @@
     "named": false
   },
   {
+    "type": "format_sequence",
+    "named": true
+  },
+  {
     "type": "func",
     "named": false
   },
@@ -953,7 +965,7 @@
     "named": true
   },
   {
-    "type": "string_template_plain",
+    "type": "string_template_char",
     "named": true
   },
   {

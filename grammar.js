@@ -285,23 +285,25 @@ module.exports = grammar({
     string: $ => seq(
       '"',
       repeat(choice(
+        $.format_sequence,
         $._string_non_escaped_content,
         $.escape_sequence,
       )),
       token.immediate('"'),
     ),
-    _string_non_escaped_content: _ => token.immediate(prec(1, /[^"\n\\]/)),
+    _string_non_escaped_content: _ => token.immediate(/[^"\n\\]/),
 
     string_template: $ => seq(
       "'",
       repeat(choice(
-        $.string_template_plain,
+        $.format_sequence,
         $.escape_sequence,
         $.string_template_argument,
+        $.string_template_char,
       )),
       token.immediate("'"),
     ),
-    string_template_plain: _ => token.immediate(repeat1(prec(1, /[^'\n\\{]/))),
+    string_template_char: _ => token.immediate(/[^'\n\\{]/),
 
     escape_sequence: $ => choice(
       token.immediate(choice(
@@ -321,6 +323,10 @@ module.exports = grammar({
       /\\u.{0,4}/,
       /\\U.{0,8}/,
     )),
+
+    format_sequence: _ => token.immediate(
+      /%[#+ -]?(\d+|\d+\.\d*|\d*\.\d+)?(\[\d+\])?[vT%tbcdoOqxXUeEfFgGsp]/,
+    ),
 
     string_template_argument: $ => seq(
       '{',
@@ -344,15 +350,15 @@ module.exports = grammar({
 
     // Copied from tree-sitter-c-sharp
     // https://github.com/tree-sitter/tree-sitter-c-sharp/blob/dd5e59721a5f8dae34604060833902b882023aaf/grammar.js#L1808-L1815
-    comment: _ => token(choice(
-      seq('#', /[^\r\n]*/),
-      seq('//', /[^\r\n]*/),
+    comment: _ => token(prec(-1, choice(
+      seq('#', /.*/),
+      seq('//', /.*/),
       seq(
         '/*',
         /[^*]*\*+([^/*][^*]*\*+)*/,
         '/'
       )
-    )),
+    ))),
   }
 });
 

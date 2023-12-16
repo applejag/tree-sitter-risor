@@ -114,13 +114,14 @@
 
 [
   (string)
-  (string_template_plain)
+  (string_template_char)
   "'"
   (string_backtick)
 ] @string
 
 (escape_sequence) @string.escape
 (escape_sequence_invalid) @error
+(format_sequence) @string.special
 (string_template_argument) @punctuation.special
 
 [

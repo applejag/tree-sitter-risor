@@ -24,6 +24,20 @@ Double quoted escaped string
       (escape_sequence))))
 
 ================================================================================
+Double quoted invalid escape sequence
+================================================================================
+
+"new\Pline"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (string
+      (escape_sequence
+        (escape_sequence_invalid)))))
+
+================================================================================
 Single quoted string
 ================================================================================
 
@@ -34,7 +48,10 @@ Single quoted string
 (source_file
   (expression_statement
     (string_template
-      (string_template_plain))))
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char))))
 
 ================================================================================
 Single quoted escaped string
@@ -47,9 +64,35 @@ Single quoted escaped string
 (source_file
   (expression_statement
     (string_template
-      (string_template_plain)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
       (escape_sequence)
-      (string_template_plain))))
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char))))
+
+================================================================================
+Single quoted invalid escape sequence
+================================================================================
+
+'new\Pline'
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (string_template
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
+      (escape_sequence
+        (escape_sequence_invalid))
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char))))
 
 ================================================================================
 Interpolated string with string
@@ -62,7 +105,11 @@ Interpolated string with string
 (source_file
   (expression_statement
     (string_template
-      (string_template_plain)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
       (string_template_argument
         (string)))))
 
@@ -77,7 +124,11 @@ Interpolated string with integer
 (source_file
   (expression_statement
     (string_template
-      (string_template_plain)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
       (string_template_argument
         (int_literal)))))
 
@@ -92,3 +143,61 @@ String backticks
 (source_file
   (expression_statement
     (string_backtick)))
+
+================================================================================
+Simple single quoted format sequence
+================================================================================
+
+'new%sline'
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (string_template
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
+      (format_sequence)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char)
+      (string_template_char))))
+
+================================================================================
+Simple double quoted format sequence
+================================================================================
+
+"new%sline"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (string
+      (format_sequence))))
+
+================================================================================
+Format sequence with index
+================================================================================
+
+"new%[1]sline"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (string
+      (format_sequence))))
+
+================================================================================
+Invalid format sequence just skipped
+================================================================================
+
+"new%Pline"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (string)))

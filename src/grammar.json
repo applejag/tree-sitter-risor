@@ -1139,6 +1139,10 @@
             "members": [
               {
                 "type": "SYMBOL",
+                "name": "format_sequence"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "_string_non_escaped_content"
               },
               {
@@ -1160,12 +1164,8 @@
     "_string_non_escaped_content": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[^\"\\n\\\\]"
-        }
+        "type": "PATTERN",
+        "value": "[^\"\\n\\\\]"
       }
     },
     "string_template": {
@@ -1182,7 +1182,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "string_template_plain"
+                "name": "format_sequence"
               },
               {
                 "type": "SYMBOL",
@@ -1191,6 +1191,10 @@
               {
                 "type": "SYMBOL",
                 "name": "string_template_argument"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "string_template_char"
               }
             ]
           }
@@ -1204,18 +1208,11 @@
         }
       ]
     },
-    "string_template_plain": {
+    "string_template_char": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "PATTERN",
-            "value": "[^'\\n\\\\{]"
-          }
-        }
+        "type": "PATTERN",
+        "value": "[^'\\n\\\\{]"
       }
     },
     "escape_sequence": {
@@ -1281,6 +1278,13 @@
             "value": "\\\\U.{0,8}"
           }
         ]
+      }
+    },
+    "format_sequence": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "%[#+ -]?(\\d+|\\d+\\.\\d*|\\d*\\.\\d+)?(\\[\\d+\\])?[vT%tbcdoOqxXUeEfFgGsp]"
       }
     },
     "string_template_argument": {
@@ -1462,52 +1466,56 @@
     "comment": {
       "type": "TOKEN",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "#"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^\\r\\n]*"
-              }
-            ]
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "//"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^\\r\\n]*"
-              }
-            ]
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "/*"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^*]*\\*+([^/*][^*]*\\*+)*"
-              },
-              {
-                "type": "STRING",
-                "value": "/"
-              }
-            ]
-          }
-        ]
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "#"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": ".*"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "//"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": ".*"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "/*"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[^*]*\\*+([^/*][^*]*\\*+)*"
+                },
+                {
+                  "type": "STRING",
+                  "value": "/"
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   },
