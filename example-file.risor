@@ -19,11 +19,6 @@ func yq_eval(file, expr="") {
 	return cmd.stdout
 }
 
-x := {1,2,3}
-for x == {1,2,3} {
-	printf("x: %#v", x)
-}
-
-for {
-	123
+for i, v := range ["a", "b", "c"] {
+	fmt.printf("%d: %q\n", i, v)
 }
