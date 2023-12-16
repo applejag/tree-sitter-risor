@@ -23,7 +23,30 @@ Set literal
 
 (source_file
   (expression_statement
-    (set_literal
-      (int_literal)
-      (int_literal)
-      (int_literal))))
+    (map_or_set_literal
+      (set_literal_values
+        (int_literal)
+        (int_literal)
+        (int_literal)))))
+
+================================================================================
+Map literal
+================================================================================
+
+{"x": 1, "y": 2, "z": 3}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (map_or_set_literal
+      (map_literal_values
+        (map_literal_pair
+          (string)
+          (int_literal))
+        (map_literal_pair
+          (string)
+          (int_literal))
+        (map_literal_pair
+          (string)
+          (int_literal))))))

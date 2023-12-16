@@ -248,7 +248,7 @@ module.exports = grammar({
       optional($._statement_list),
     ),
 
-    expression_statement: $ => $._expression,
+    expression_statement: $ => prec(1, $._expression),
 
     _expression: $ => choice(
       $.unary_expression,
@@ -301,7 +301,7 @@ module.exports = grammar({
 
     _complex_literal: $ => prec(PREC.complex_literal, choice(
       $.list_literal,
-      $.set_literal,
+      $.map_or_set_literal,
     )),
 
     list_literal: $ => seq(
@@ -310,11 +310,24 @@ module.exports = grammar({
       ']',
     ),
 
-    set_literal: $ => prec(1, seq(
+    map_or_set_literal: $ => prec(1, seq(
       '{',
-      commaSep($._expression),
+      optional(choice(
+        $.set_literal_values,
+        $.map_literal_values,
+      )),
       '}',
     )),
+
+    set_literal_values: $ => commaSep1($._expression),
+
+    map_literal_values: $ => commaSep1($.map_literal_pair),
+
+    map_literal_pair: $ => seq(
+      field('name', $._expression),
+      ':',
+      field('value', $._expression),
+    ),
 
     unary_expression: $ => prec(PREC.unary, seq(
       field('operator', choice('+', '-', '!', '^', '*', '&', '<-')),
