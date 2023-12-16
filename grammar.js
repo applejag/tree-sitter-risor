@@ -303,12 +303,23 @@ module.exports = grammar({
     ),
     string_template_plain: _ => token.immediate(repeat1(prec(1, /[^'\n\\{]/))),
 
-    escape_sequence: _ => token.immediate(choice(
-      /\\[^xuU]/,
-      /\\\d{2,3}/,
-      /\\x[0-9a-fA-F]{2,}/,
-      /\\u[0-9a-fA-F]{4}/,
-      /\\U[0-9a-fA-F]{8}/,
+    escape_sequence: $ => choice(
+      token.immediate(choice(
+        /\\[abfnrtve]/,
+        /\\[0-3][0-7][0-7]/,
+        /\\x[0-9a-fA-F]{2}/,
+        /\\u[0-9a-fA-F]{4}/,
+        /\\U[0-9a-fA-F]{8}/,
+      )),
+      $.escape_sequence_invalid,
+    ),
+
+    escape_sequence_invalid: _ => token.immediate(choice(
+      /\\[^abfnrtvexuU0-3]/,
+      /\\[0-3].{0,2}/,
+      /\\x.{0,2}/,
+      /\\u.{0,4}/,
+      /\\U.{0,8}/,
     )),
 
     string_template_argument: $ => seq(

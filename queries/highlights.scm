@@ -120,6 +120,7 @@
 ] @string
 
 (escape_sequence) @string.escape
+(escape_sequence_invalid) @error
 (string_template_argument) @punctuation.special
 
 [

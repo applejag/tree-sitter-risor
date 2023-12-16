@@ -1219,29 +1219,66 @@
       }
     },
     "escape_sequence": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "\\\\[abfnrtve]"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\\\[0-3][0-7][0-7]"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\\\x[0-9a-fA-F]{2}"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\\\u[0-9a-fA-F]{4}"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\\\U[0-9a-fA-F]{8}"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "escape_sequence_invalid"
+        }
+      ]
+    },
+    "escape_sequence_invalid": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "CHOICE",
         "members": [
           {
             "type": "PATTERN",
-            "value": "\\\\[^xuU]"
+            "value": "\\\\[^abfnrtvexuU0-3]"
           },
           {
             "type": "PATTERN",
-            "value": "\\\\\\d{2,3}"
+            "value": "\\\\[0-3].{0,2}"
           },
           {
             "type": "PATTERN",
-            "value": "\\\\x[0-9a-fA-F]{2,}"
+            "value": "\\\\x.{0,2}"
           },
           {
             "type": "PATTERN",
-            "value": "\\\\u[0-9a-fA-F]{4}"
+            "value": "\\\\u.{0,4}"
           },
           {
             "type": "PATTERN",
-            "value": "\\\\U[0-9a-fA-F]{8}"
+            "value": "\\\\U.{0,8}"
           }
         ]
       }

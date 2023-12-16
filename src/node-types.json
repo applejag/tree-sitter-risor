@@ -249,6 +249,21 @@
     }
   },
   {
+    "type": "escape_sequence",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence_invalid",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "expression_list",
     "named": true,
     "fields": {},
@@ -886,7 +901,7 @@
     "named": false
   },
   {
-    "type": "escape_sequence",
+    "type": "escape_sequence_invalid",
     "named": true
   },
   {
