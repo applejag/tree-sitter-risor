@@ -24,6 +24,9 @@ const
   //comparative_operators = ['==', '!=', '<', '<=', '>', '>='],
   assignment_operators = ['=', '*=', '-=', '+=', '/='],
 
+  newline = '\n',
+  terminator = choice(newline, ';', '\0'),
+
   hexDigit = /[0-9a-fA-F]/,
   octalDigit = /[0-7]/,
   decimalDigit = /[0-9]/,
@@ -65,21 +68,21 @@ module.exports = grammar({
 
   rules: {
     source_file: $ => repeat(choice(
-      $._statement,
+      seq($._statement, terminator),
       $._definition,
     )),
 
     _definition: $ => choice(
-      $.function_definition
+      $.function_declaration,
       // TODO: other kinds of definitions
     ),
 
-    function_definition: $ => seq(
+    function_declaration: $ => prec.right(1, seq(
       'func',
       field('name', $.identifier),
       field('parameters', $.parameter_list),
       field('body', $.block)
-    ),
+    )),
 
     parameter_list: $ => seq(
       '(',
@@ -107,8 +110,14 @@ module.exports = grammar({
 
     block: $ => seq(
       '{',
-      repeat($._statement),
+      optional($._statement_list),
       '}'
+    ),
+
+    _statement_list: $ => seq(
+      $._statement,
+      repeat(seq(terminator, $._statement)),
+      optional(terminator),
     ),
 
     _statement: $ => choice(
@@ -118,6 +127,7 @@ module.exports = grammar({
       $.return_statement,
       $.if_statement,
       $.for_statement,
+      $.switch_statement,
       // TODO: other kinds of statements
     ),
 
@@ -192,6 +202,27 @@ module.exports = grammar({
       )),
       'range',
       field('right', $._expression),
+    ),
+
+    switch_statement: $ => seq(
+      'switch',
+      field('value', optional($._expression)),
+      '{',
+      repeat(choice($.switch_case, $.default_case)),
+      '}',
+    ),
+
+    switch_case: $ => seq(
+      'case',
+      field('value', $.expression_list),
+      ':',
+      optional($._statement_list),
+    ),
+
+    default_case: $ => seq(
+      'default',
+      ':',
+      optional($._statement_list),
     ),
 
     expression_statement: $ => $._expression,

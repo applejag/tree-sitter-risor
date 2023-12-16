@@ -8,7 +8,7 @@ func myfunc() {
 --------------------------------------------------------------------------------
 
 (source_file
-  (function_definition
+  (function_declaration
     (identifier)
     (parameter_list)
     (block)))
@@ -23,7 +23,7 @@ func myfunc(param1) {
 --------------------------------------------------------------------------------
 
 (source_file
-  (function_definition
+  (function_declaration
     (identifier)
     (parameter_list
       (parameter_declaration
@@ -40,7 +40,7 @@ func myfunc(param1 = 123) {
 --------------------------------------------------------------------------------
 
 (source_file
-  (function_definition
+  (function_declaration
     (identifier)
     (parameter_list
       (parameter_declaration_default
@@ -58,7 +58,7 @@ func myfunc(param1, param2, param3) {
 --------------------------------------------------------------------------------
 
 (source_file
-  (function_definition
+  (function_declaration
     (identifier)
     (parameter_list
       (parameter_declaration
@@ -79,7 +79,7 @@ func myfunc(param1, param2, param3,) {
 --------------------------------------------------------------------------------
 
 (source_file
-  (function_definition
+  (function_declaration
     (identifier)
     (parameter_list
       (parameter_declaration
@@ -101,7 +101,7 @@ func myfunc() {
 --------------------------------------------------------------------------------
 
 (source_file
-  (function_definition
+  (function_declaration
     (identifier)
     (parameter_list)
     (block
@@ -120,7 +120,7 @@ func myfunc() {
 --------------------------------------------------------------------------------
 
 (source_file
-  (function_definition
+  (function_declaration
     (identifier)
     (parameter_list)
     (block

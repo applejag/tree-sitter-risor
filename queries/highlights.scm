@@ -75,7 +75,7 @@
   ";"
   "."
   ","
-  ;":"
+  ":"
 ] @punctuation.delimiter
 
 [
@@ -91,10 +91,10 @@
 
 [
   ;"break"
-  ;"case"
+  "case"
   "const"
   ;"continue"
-  ;"default"
+  "default"
   "else"
   "for"
   "range"
@@ -102,7 +102,7 @@
   "if"
   ;"import"
   ;"in"
-  ;"switch"
+  "switch"
   "var"
 ] @keyword
 
@@ -120,7 +120,7 @@
 ] @string
 
 (escape_sequence) @string.escape
-(string_template_argument) @none
+(string_template_argument) @punctuation.special
 
 [
   (int_literal)

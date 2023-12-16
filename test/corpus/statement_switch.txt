@@ -1,0 +1,63 @@
+================================================================================
+Empty block
+================================================================================
+
+switch x {}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (switch_statement
+    (identifier)))
+
+================================================================================
+Only default case
+================================================================================
+
+switch x {
+default:
+  123
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (switch_statement
+    (identifier)
+    (default_case
+      (expression_statement
+        (int_literal)))))
+
+================================================================================
+Multiple cases
+================================================================================
+
+switch x {
+case 1:
+  123
+case 2:
+  456
+case 3:
+  789
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (switch_statement
+    (identifier)
+    (switch_case
+      (expression_list
+        (int_literal))
+      (expression_statement
+        (int_literal)))
+    (switch_case
+      (expression_list
+        (int_literal))
+      (expression_statement
+        (int_literal)))
+    (switch_case
+      (expression_list
+        (int_literal))
+      (expression_statement
+        (int_literal)))))

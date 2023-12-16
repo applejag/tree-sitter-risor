@@ -90,6 +90,10 @@
         "named": true
       },
       {
+        "type": "switch_statement",
+        "named": true
+      },
+      {
         "type": "var_declaration",
         "named": true
       }
@@ -230,6 +234,21 @@
     }
   },
   {
+    "type": "default_case",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "expression_list",
     "named": true,
     "fields": {},
@@ -330,7 +349,7 @@
     }
   },
   {
-    "type": "function_definition",
+    "type": "function_declaration",
     "named": true,
     "fields": {
       "body": {
@@ -629,7 +648,7 @@
           "named": true
         },
         {
-          "type": "function_definition",
+          "type": "function_declaration",
           "named": true
         }
       ]
@@ -689,6 +708,62 @@
     }
   },
   {
+    "type": "switch_case",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression_list",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "switch_statement",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "default_case",
+          "named": true
+        },
+        {
+          "type": "switch_case",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "var_declaration",
     "named": true,
     "fields": {
@@ -713,6 +788,14 @@
         ]
       }
     }
+  },
+  {
+    "type": "\u0000",
+    "named": false
+  },
+  {
+    "type": "\n",
+    "named": false
   },
   {
     "type": "\"",
@@ -755,6 +838,10 @@
     "named": false
   },
   {
+    "type": ":",
+    "named": false
+  },
+  {
     "type": ":=",
     "named": false
   },
@@ -779,11 +866,19 @@
     "named": false
   },
   {
+    "type": "case",
+    "named": false
+  },
+  {
     "type": "comment",
     "named": true
   },
   {
     "type": "const",
+    "named": false
+  },
+  {
+    "type": "default",
     "named": false
   },
   {
@@ -845,6 +940,10 @@
   {
     "type": "string_template_plain",
     "named": true
+  },
+  {
+    "type": "switch",
+    "named": false
   },
   {
     "type": "true",
