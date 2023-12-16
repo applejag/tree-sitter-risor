@@ -38,7 +38,6 @@
   ":="
   "!"
   "!="
-  ;"..."
   "**"
   "*"
   "*="
@@ -61,6 +60,7 @@
   ">>"
   "|"
   "||"
+  "?"
 ] @operator
 
 [
@@ -69,6 +69,9 @@
   ","
   ":"
 ] @punctuation.delimiter
+
+(conditional_expression
+  [":"] @operator)
 
 [
   "["

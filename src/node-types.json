@@ -12,6 +12,10 @@
         "named": true
       },
       {
+        "type": "conditional_expression",
+        "named": true
+      },
+      {
         "type": "false",
         "named": true
       },
@@ -349,6 +353,42 @@
     }
   },
   {
+    "type": "conditional_expression",
+    "named": true,
+    "fields": {
+      "alternative": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      },
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      },
+      "consequence": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "const_declaration",
     "named": true,
     "fields": {
@@ -652,6 +692,26 @@
     "type": "import_statement",
     "named": true,
     "fields": {
+      "as": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "import_statement_as",
+            "named": true
+          }
+        ]
+      },
+      "from": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "import_statement_from",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -662,20 +722,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "import_statement_as",
-          "named": true
-        },
-        {
-          "type": "import_statement_from",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1379,6 +1425,10 @@
   },
   {
     "type": ">>",
+    "named": false
+  },
+  {
+    "type": "?",
     "named": false
   },
   {

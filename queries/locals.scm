@@ -19,6 +19,14 @@
   name: (expression_list
           (identifier) @definition.constant))
 
+(import_statement
+  name: (identifier) @definition.import
+  !as)
+
+(import_statement
+  as: (import_statement_as
+    (identifier) @definition.import))
+
 ;;; References
 
 (identifier) @reference

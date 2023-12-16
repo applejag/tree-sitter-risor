@@ -193,10 +193,10 @@ module.exports = grammar({
     return_statement: $ => seq('return', optional($._expression)),
 
     import_statement: $ => seq(
-      optional($.import_statement_from),
+      optional(field('from', $.import_statement_from)),
       'import',
       field('name', $.identifier),
-      optional($.import_statement_as),
+      optional(field('as', $.import_statement_as)),
     ),
 
     import_statement_from: $ => seq(
@@ -277,6 +277,7 @@ module.exports = grammar({
     _expression: $ => choice(
       $.unary_expression,
       $.binary_expression,
+      $.conditional_expression,
       $.selector_expression,
       $.index_expression,
       $.call_expression,
@@ -377,6 +378,14 @@ module.exports = grammar({
         )),
       ));
     },
+
+    conditional_expression: $ => prec.right(PREC.ternary, seq(
+      field('condition', $._expression),
+      '?',
+      field('consequence', $._expression),
+      ':',
+      field('alternative', $._expression)
+    )),
 
     identifier: _ => /[_\p{XID_Start}][_\p{XID_Continue}]*/,
     _field_identifier: $ => alias($.identifier, $.field_identifier),
