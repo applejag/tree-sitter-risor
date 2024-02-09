@@ -13,21 +13,24 @@
   (.match? @function.builtin "^(all|any|assert|bool|buffer|byte_slice|byte|call|cat|cd|chr|cp|decode|delete|encode|error|float_slice|float|getattr|getenv|hash|int|iter|keys|len|list|ls|map|ord|print|printf|reversed|set|setenv|sorted|sprintf|string|try|type|unsetenv)$"))
 
 (call_expression
-  function: (identifier) @function)
+  function: (identifier) @function.call)
 
 (call_expression
   function: (selector_expression
-    field: (field_identifier) @function.method))
+    field: (field_identifier) @function.method.call))
 
 ; Function declaration
 
+(function_declaration
+  name: (identifier) @function)
+
 (parameter_list
   (parameter_declaration
-   name: (identifier) @parameter))
+   name: (identifier) @variable.parameter))
 
 (parameter_list
   (parameter_declaration_default
-   name: (identifier) @parameter))
+   name: (identifier) @variable.parameter))
 
 ; Operators
 
@@ -85,38 +88,35 @@
 ; Keywords
 
 [
+  "break"
   "const"
+  "continue"
+  "default"
+  ;"defer"
+  "range"
   "var"
 ] @keyword
 
-[
-  "func"
-] @keyword.function
+"func" @keyword.function
 
-[
-  "for"
-  "range"
-  "break"
-  "continue"
-] @keyword @repeat
+"return" @keyword.return
 
-[
-  "if"
-  "else"
-  "switch"
-  "case"
-  "default"
-] @keyword @conditional
+;"go" @keyword.coroutine
+
+"for" @keyword.repeat
 
 [
   "import"
   "from"
   "as"
-] @keyword @include
+] @keyword.import
 
 [
-  "return"
-] @keyword.return
+  "case"
+  "else"
+  "if"
+  "switch"
+] @keyword.conditional
 
 ; Literals
 
@@ -132,18 +132,17 @@
 (format_sequence) @string.special
 (string_template_argument) @punctuation.special
 
-[
-  (int_literal)
-  (float_literal)
-] @number
+(int_literal) @number
+(float_literal) @number.float
 
 [
   (true)
   (false)
-  (nil)
-] @constant.builtin
+] @boolean
 
-(comment) @comment
+(nil) @constant.builtin
+
+(comment) @comment @spell
 
 ((source_file . (comment) @preproc)
  (#lua-match? @preproc "^#!/"))

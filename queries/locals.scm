@@ -1,65 +1,65 @@
 ;; Definitions
 
 (function_declaration
-  name: ((identifier) @definition.var)
+  name: ((identifier) @local.definition.var)
     (#set! "definition.var.scope" "parent"))
 
 (parameter_declaration
-  name: (identifier) @definition.parameter)
+  name: (identifier) @local.definition.var)
 
 (short_var_declaration
   left: (expression_list
-    (identifier) @definition.var))
+    (identifier) @local.definition.var))
 
 (var_declaration
   name: (expression_list
-          (identifier) @definition.var))
+          (identifier) @local.definition.var))
 
 (const_declaration
   name: (expression_list
-          (identifier) @definition.constant))
+          (identifier) @local.definition.var))
 
 (import_statement
-  name: (identifier) @definition.import
+  name: (identifier) @local.definition.namespace
   !as)
 
 (import_statement
   as: (import_statement_as
-    (identifier) @definition.import))
+    (identifier) @local.definition.namespace))
 
 ;;; References
 
-(identifier) @reference
-(field_identifier) @reference
+(identifier) @local.reference
+(field_identifier) @local.reference
 
 ;;; Call references
 
 ((call_expression
-   function: (identifier) @reference)
+   function: (identifier) @local.reference)
  (#set! reference.kind "call" ))
 
 ((call_expression
     function: (selector_expression
-                field: (field_identifier) @reference))
+                field: (field_identifier) @local.reference))
  (#set! reference.kind "call" ))
 
 ((call_expression
     function: (parenthesized_expression
-                (identifier) @reference))
+                (identifier) @local.reference))
  (#set! reference.kind "call" ))
 
 ((call_expression
    function: (parenthesized_expression
                (selector_expression
-                 field: (field_identifier) @reference)))
+                 field: (field_identifier) @local.reference)))
  (#set! reference.kind "call" ))
 
 ;; Scopes
 
-;(func_literal) @scope
-(source_file) @scope
-(function_declaration) @scope
-(if_statement) @scope
-(block) @scope
-(switch_statement) @scope
-(for_statement) @scope
+;(func_literal) @local.scope
+(source_file) @local.scope
+(function_declaration) @local.scope
+(if_statement) @local.scope
+(block) @local.scope
+(switch_statement) @local.scope
+(for_statement) @local.scope
