@@ -92,7 +92,7 @@
   "const"
   "continue"
   "default"
-  ;"defer"
+  "defer"
   "range"
   "var"
 ] @keyword
@@ -101,7 +101,7 @@
 
 "return" @keyword.return
 
-;"go" @keyword.coroutine
+"go" @keyword.coroutine
 
 "for" @keyword.repeat
 

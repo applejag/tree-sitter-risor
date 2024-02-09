@@ -122,6 +122,8 @@ module.exports = grammar({
     _statement: $ => choice(
       $._simple_statement,
       $.return_statement,
+      $.go_statement,
+      $.defer_statement,
       $.if_statement,
       $.for_statement,
       $.switch_statement,
@@ -186,6 +188,10 @@ module.exports = grammar({
     continue_statement: _ => seq('continue'),
 
     return_statement: $ => seq('return', optional($._expression)),
+
+    go_statement: $ => seq('go', $._expression),
+
+    defer_statement: $ => seq('defer', $._expression),
 
     import_statement: $ => seq(
       optional(field('from', $.import_statement_from)),
