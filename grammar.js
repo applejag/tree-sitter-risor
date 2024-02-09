@@ -107,11 +107,6 @@ module.exports = grammar({
       field('default', $._expression),
     ),
 
-    _type: _ => choice(
-      'bool',
-      // TODO: other kinds of types
-    ),
-
     block: $ => prec(PREC.block, seq(
       '{',
       optional($._statement_list),
@@ -282,6 +277,7 @@ module.exports = grammar({
       $.index_expression,
       $.call_expression,
       $.identifier,
+      $.func_literal,
       $._complex_literal,
       $._string_literal,
       $.int_literal,
@@ -389,6 +385,12 @@ module.exports = grammar({
 
     identifier: _ => /[_\p{XID_Start}][_\p{XID_Continue}]*/,
     _field_identifier: $ => alias($.identifier, $.field_identifier),
+
+    func_literal: $ => seq(
+      'func',
+      field('parameters', $.parameter_list),
+      field('body', $.block),
+    ),
 
     _string_literal: $ => choice(
       $.string,

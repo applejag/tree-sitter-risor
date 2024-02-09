@@ -24,6 +24,10 @@
         "named": true
       },
       {
+        "type": "func_literal",
+        "named": true
+      },
+      {
         "type": "identifier",
         "named": true
       },
@@ -610,6 +614,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "func_literal",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1445,10 +1475,6 @@
   },
   {
     "type": "as",
-    "named": false
-  },
-  {
-    "type": "bool",
     "named": false
   },
   {

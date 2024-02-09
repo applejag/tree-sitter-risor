@@ -207,15 +207,6 @@
         }
       ]
     },
-    "_type": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "bool"
-        }
-      ]
-    },
     "block": {
       "type": "PREC",
       "value": -2,
@@ -1072,6 +1063,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "func_literal"
+        },
+        {
+          "type": "SYMBOL",
           "name": "_complex_literal"
         },
         {
@@ -1820,6 +1815,31 @@
       },
       "named": true,
       "value": "field_identifier"
+    },
+    "func_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "func"
+        },
+        {
+          "type": "FIELD",
+          "name": "parameters",
+          "content": {
+            "type": "SYMBOL",
+            "name": "parameter_list"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "block"
+          }
+        }
+      ]
     },
     "_string_literal": {
       "type": "CHOICE",

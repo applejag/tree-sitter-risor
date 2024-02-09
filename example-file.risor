@@ -11,6 +11,10 @@ arr[1] = 5 << 2
 const TRUE = true
 num2++
 
+f := func(foo) {
+	return "hello world"
+}
+
 func yq_eval(file, expr="") {
 	cmd := exec.command("yq", "eval", expr, file)
 	try(cmd.run, "")

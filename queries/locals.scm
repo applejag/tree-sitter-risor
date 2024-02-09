@@ -56,7 +56,7 @@
 
 ;; Scopes
 
-;(func_literal) @local.scope
+(func_literal) @local.scope
 (source_file) @local.scope
 (function_declaration) @local.scope
 (if_statement) @local.scope
