@@ -15,6 +15,8 @@ grammar for the [Risor](https://risor.io/) scripting language.
 To install locally for Neovim, follow this guide:
 <https://github.com/nvim-treesitter/nvim-treesitter#adding-parsers>
 
+[@rubiojr](https://github.com/rubiojr) also packaged this grammar for [Zed](https://zed.dev/): <https://github.com/rubiojr/zed-risor>
+
 ## License
 
 This repository is licensed under the MIT license.
