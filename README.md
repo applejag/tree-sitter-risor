@@ -3,6 +3,11 @@
 [Tree-sitter](https://github.com/tree-sitter/tree-sitter)
 grammar for the [Risor](https://risor.io/) scripting language.
 
+> [!WARNING]
+> This repo is unmaintained.
+>
+> The tree-sitter grammar only applies to Risor v1 and not to Risor v2.
+
 ![neovim screenshot](./docs/nvim-screenshot.png)
 
 ## Installing
